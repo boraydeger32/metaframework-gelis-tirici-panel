@@ -72,7 +72,7 @@ export default function ModulesPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Modules</h1>
           <p className="text-sm text-neutral-400">
@@ -80,11 +80,11 @@ export default function ModulesPage() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
             <Wand2 className="mr-2 h-3 w-3" />
             AI ile Scaffold
           </Button>
-          <Button size="sm">
+          <Button size="sm" className="flex-1 sm:flex-none">
             <Plus className="mr-2 h-3 w-3" />
             Yeni Modül
           </Button>
@@ -92,8 +92,8 @@ export default function ModulesPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex items-center gap-3">
-        <div className="relative flex-1 max-w-sm">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="relative flex-1 sm:max-w-sm">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
           <Input
             placeholder="Modül ara..."

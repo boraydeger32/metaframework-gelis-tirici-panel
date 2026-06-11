@@ -175,8 +175,8 @@ export function ContextualDock() {
   const config = dockConfigs[pathname] || dockConfigs["/"];
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
-      <div className="flex items-end gap-1 rounded-2xl border border-neutral-800/80 bg-neutral-950/90 px-2 py-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-2rem)] sm:bottom-6">
+      <div className="flex items-end gap-1 rounded-2xl border border-neutral-800/80 bg-neutral-950/90 px-2 py-2 shadow-2xl shadow-black/40 backdrop-blur-xl overflow-x-auto">
         {config.actions.map((action, i) => {
           const isHovered = hoveredIndex === i;
           const isNeighbor =

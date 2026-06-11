@@ -152,7 +152,7 @@ export function FloatingOrb() {
 
       {/* Chat Panel */}
       {open && !minimized && (
-        <div className="fixed bottom-6 right-6 z-50 w-[380px] animate-in rounded-2xl border border-neutral-800 bg-neutral-950/95 shadow-2xl shadow-black/50 backdrop-blur-xl overflow-hidden flex flex-col" style={{ maxHeight: "min(560px, calc(100vh - 120px))" }}>
+        <div className="fixed bottom-0 right-0 z-50 w-full sm:bottom-6 sm:right-6 sm:w-[380px] animate-in sm:rounded-2xl border border-neutral-800 bg-neutral-950/95 shadow-2xl shadow-black/50 backdrop-blur-xl overflow-hidden flex flex-col" style={{ maxHeight: "min(560px, calc(100vh - 60px))" }}>
           {/* Header */}
           <div className="flex items-center gap-3 border-b border-neutral-800/50 px-4 py-3">
             <div className="relative">

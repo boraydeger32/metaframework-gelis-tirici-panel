@@ -87,17 +87,17 @@ export default function PermissionsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Permissions & Roles</h1>
           <p className="text-sm text-neutral-400">Rol bazlı erişim kontrolü (RBAC)</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
             <Wand2 className="mr-2 h-3 w-3" />
             AI ile Öner
           </Button>
-          <Button size="sm">
+          <Button size="sm" className="flex-1 sm:flex-none">
             <Plus className="mr-2 h-3 w-3" />
             Yeni Rol
           </Button>
@@ -133,7 +133,7 @@ export default function PermissionsPage() {
       {/* Permission Matrix */}
       <Card>
         <CardHeader className="pb-3">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <CardTitle className="flex items-center gap-2">
                 <div className={cn("h-2.5 w-2.5 rounded-full", activeRole.color)} />
@@ -142,9 +142,8 @@ export default function PermissionsPage() {
               <CardDescription>{totalPerms} / {maxPerms} yetki aktif</CardDescription>
             </div>
             <div className="flex items-center gap-3">
-              {/* Permission progress */}
               <div className="flex items-center gap-2">
-                <div className="h-1.5 w-32 rounded-full bg-neutral-800 overflow-hidden">
+                <div className="h-1.5 w-20 sm:w-32 rounded-full bg-neutral-800 overflow-hidden">
                   <div
                     className="h-full rounded-full bg-indigo-600 transition-all"
                     style={{ width: `${(totalPerms / maxPerms) * 100}%` }}

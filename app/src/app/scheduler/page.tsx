@@ -56,14 +56,14 @@ export default function SchedulerPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Scheduled Jobs</h1>
           <p className="text-sm text-neutral-400">{activeCount} / {jobList.length} job aktif</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm"><Wand2 className="mr-2 h-3 w-3" />AI ile Oluştur</Button>
-          <Button size="sm"><Plus className="mr-2 h-3 w-3" />Yeni Job</Button>
+          <Button variant="outline" size="sm" className="flex-1 sm:flex-none"><Wand2 className="mr-2 h-3 w-3" />AI ile Oluştur</Button>
+          <Button size="sm" className="flex-1 sm:flex-none"><Plus className="mr-2 h-3 w-3" />Yeni Job</Button>
         </div>
       </div>
 

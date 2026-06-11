@@ -23,12 +23,12 @@ const recentDeliveries = [
 export default function WebhooksPage() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Webhooks</h1>
           <p className="text-sm text-neutral-400">Event hook&apos;ları ve webhook endpoint&apos;lerini yönetin</p>
         </div>
-        <Button size="sm">
+        <Button size="sm" className="w-full sm:w-auto">
           <Plus className="mr-2 h-3 w-3" />
           Yeni Webhook
         </Button>
@@ -90,12 +90,12 @@ export default function WebhooksPage() {
         <CardContent>
           <div className="space-y-2">
             {recentDeliveries.map((d, i) => (
-              <div key={i} className="flex items-center justify-between rounded-lg border border-neutral-800 p-3 text-sm">
-                <div className="flex items-center gap-3">
+              <div key={i} className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-wrap items-center gap-2">
                   {d.status === "success" ? (
-                    <CheckCircle className="h-4 w-4 text-emerald-400" />
+                    <CheckCircle className="h-4 w-4 text-emerald-400 shrink-0" />
                   ) : (
-                    <XCircle className="h-4 w-4 text-red-400" />
+                    <XCircle className="h-4 w-4 text-red-400 shrink-0" />
                   )}
                   <Badge variant="outline" className="text-[10px] font-mono">{d.event}</Badge>
                   <Badge variant={d.status === "success" ? "success" : "destructive"} className="text-[10px]">

@@ -70,7 +70,7 @@ export function KeyboardShortcuts() {
             </button>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 p-6 max-h-[60vh] overflow-y-auto">
+          <div className="grid grid-cols-1 gap-6 p-4 sm:grid-cols-2 sm:p-6 max-h-[60vh] overflow-y-auto">
             {shortcuts.map((section) => (
               <div key={section.section}>
                 <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-neutral-500">{section.section}</h3>

@@ -38,11 +38,11 @@ export default function ActivityPage() {
         <CardContent className="p-0">
           <div className="divide-y divide-neutral-800">
             {activities.map((item, i) => (
-              <div key={i} className="flex items-center gap-4 px-6 py-4 hover:bg-neutral-800/30 transition-colors">
-                <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${typeColors[item.type]}`}>
+              <div key={i} className="flex flex-col gap-2 px-4 py-3 hover:bg-neutral-800/30 transition-colors sm:flex-row sm:items-center sm:gap-4 sm:px-6 sm:py-4">
+                <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${typeColors[item.type]}`}>
                   <item.icon className="h-4 w-4" />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <p className="text-sm">
                     <span className="font-medium text-neutral-200">{item.action}</span>
                     <span className="text-neutral-500"> — </span>
@@ -52,8 +52,10 @@ export default function ActivityPage() {
                     by <span className={item.user === "ai-copilot" ? "text-indigo-400" : "text-neutral-400"}>{item.user}</span>
                   </p>
                 </div>
-                <Badge variant="outline" className="text-[10px]">{item.type}</Badge>
-                <span className="text-xs text-neutral-500 w-24 text-right">{item.time}</span>
+                <div className="flex items-center gap-2 sm:shrink-0">
+                  <Badge variant="outline" className="text-[10px]">{item.type}</Badge>
+                  <span className="text-xs text-neutral-500">{item.time}</span>
+                </div>
               </div>
             ))}
           </div>

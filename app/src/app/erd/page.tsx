@@ -103,12 +103,12 @@ export default function ERDPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">ERD Diagram</h1>
           <p className="text-sm text-neutral-400">{models.length} model · {relations.length} relation</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button variant="outline" size="sm"><Wand2 className="mr-2 h-3 w-3" />AI Analiz</Button>
           <Button variant="outline" size="sm"><Download className="mr-2 h-3 w-3" />SVG Export</Button>
           <div className="flex items-center rounded-lg border border-neutral-800">

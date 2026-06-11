@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((mod) => mod.default), { ssr: false, loading: () => <div className="flex h-[500px] items-center justify-center bg-neutral-950 text-neutral-600 text-sm">Editor yükleniyor...</div> });
+const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((mod) => mod.default), { ssr: false, loading: () => <div className="flex h-[400px] items-center justify-center bg-neutral-950 text-neutral-600 text-sm">Editor yükleniyor...</div> });
 
 const fileTree = [
   { type: "folder" as const, name: "models", children: [
@@ -127,12 +127,12 @@ export default function CodeEditorPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Code Editor</h1>
           <p className="text-sm text-neutral-400">AI destekli kod düzenleme</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button variant="outline" size="sm"><Wand2 className="mr-2 h-3 w-3" />AI Açıkla</Button>
           <Button variant="outline" size="sm"><Bug className="mr-2 h-3 w-3" />Hata Bul</Button>
           <Button size="sm"><Save className="mr-2 h-3 w-3" />Kaydet</Button>
@@ -187,7 +187,7 @@ export default function CodeEditorPage() {
             </button>
           </div>
           <MonacoEditor
-            height="500px"
+            height="400px"
             language="typescript"
             theme="vs-dark"
             value={fileContents[activeFile] || "// Dosya bulunamadı"}

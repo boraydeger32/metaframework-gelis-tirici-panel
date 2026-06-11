@@ -63,12 +63,12 @@ export default function HealthPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">System Health</h1>
           <p className="text-sm text-neutral-400">Sistem durumu ve performans metrikleri</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2 rounded-lg border border-emerald-800/30 bg-emerald-950/20 px-3 py-1.5">
             <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-xs text-emerald-400 font-medium">All Systems Operational</span>
@@ -80,9 +80,9 @@ export default function HealthPage() {
       {/* Uptime Banner */}
       <Card>
         <CardContent className="p-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-600/10">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-emerald-600/10">
                 <Zap className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
@@ -90,16 +90,16 @@ export default function HealthPage() {
                 <p className="text-xs text-neutral-500 font-mono">{formatUptime(uptimeSeconds)}</p>
               </div>
             </div>
-            <div className="flex items-center gap-6">
-              <div className="text-right">
+            <div className="flex items-center gap-4 sm:gap-6">
+              <div className="text-left sm:text-right">
                 <p className="text-xs text-neutral-500">Availability (30d)</p>
                 <p className="text-lg font-bold text-emerald-400">99.97%</p>
               </div>
-              <div className="text-right">
+              <div className="text-left sm:text-right">
                 <p className="text-xs text-neutral-500">Avg Response</p>
                 <p className="text-lg font-bold text-neutral-200">45ms</p>
               </div>
-              <div className="text-right">
+              <div className="text-left sm:text-right">
                 <p className="text-xs text-neutral-500">Requests (24h)</p>
                 <p className="text-lg font-bold text-neutral-200">12.4K</p>
               </div>
@@ -171,7 +171,7 @@ export default function HealthPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {dbStats.map((s) => (
                 <div key={s.label} className="rounded-lg bg-neutral-800/30 p-2.5">
                   <p className="text-[10px] text-neutral-500">{s.label}</p>

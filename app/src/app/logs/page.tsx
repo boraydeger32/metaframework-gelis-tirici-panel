@@ -161,7 +161,7 @@ export default function LogsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">System Logs</h1>
           <p className="text-sm text-neutral-400">Hata logları ve sistem konsolu</p>
@@ -179,7 +179,7 @@ export default function LogsPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {(["error", "warning", "info", "debug"] as const).map((level) => {
           const config = levelConfig[level];
           const Icon = config.icon;
@@ -205,8 +205,8 @@ export default function LogsPage() {
       </div>
 
       {/* Search */}
-      <div className="flex items-center gap-3">
-        <div className="relative flex-1 max-w-sm">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="relative flex-1 sm:max-w-sm">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
           <Input placeholder="Log ara..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
         </div>

@@ -38,7 +38,7 @@ export default function RootLayout({
         <DynamicIsland />
         <AISuggestions />
         <KeyboardShortcuts />
-        <main className="relative z-10 mx-auto max-w-7xl px-6 pt-20 pb-24">{children}</main>
+        <main className="relative z-10 mx-auto max-w-7xl px-3 pt-16 pb-28 sm:px-6 sm:pt-20 sm:pb-24">{children}</main>
         <ContextualDock />
         <FloatingOrb />
       </body>

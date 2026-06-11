@@ -115,7 +115,7 @@ export default function DocsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Documentation</h1>
           <p className="text-sm text-neutral-400">Otomatik üretilmiş API ve model dokümantasyonu</p>
@@ -173,7 +173,7 @@ export default function DocsPage() {
         {/* Content */}
         <Card className="lg:col-span-3">
           <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="text-[10px]">{activeSection}</Badge>
                 <ChevronRight className="h-3 w-3 text-neutral-600" />
@@ -201,9 +201,9 @@ export default function DocsPage() {
                   const cells = line.split("|").filter(Boolean).map((c) => c.trim());
                   if (cells.every((c) => c.match(/^[-:]+$/))) return null;
                   return (
-                    <div key={i} className="flex text-[11px] font-mono border-b border-neutral-800/50">
+                    <div key={i} className="flex text-[10px] sm:text-[11px] font-mono border-b border-neutral-800/50 overflow-x-auto">
                       {cells.map((cell, j) => (
-                        <span key={j} className={cn("flex-1 px-2 py-1", j === 0 ? "text-neutral-200 font-medium" : "text-neutral-400")}>
+                        <span key={j} className={cn("flex-1 px-1.5 sm:px-2 py-1 whitespace-nowrap", j === 0 ? "text-neutral-200 font-medium" : "text-neutral-400")}>
                           {cell}
                         </span>
                       ))}

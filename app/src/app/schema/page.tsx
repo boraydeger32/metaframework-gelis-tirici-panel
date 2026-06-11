@@ -113,7 +113,7 @@ export default function SchemaPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Schema Builder</h1>
           <p className="text-sm text-neutral-400">Model ve field tanımlarını yönetin</p>
@@ -145,15 +145,15 @@ export default function SchemaPage() {
       {/* AI Prompt Bar */}
       <Card>
         <CardContent className="p-4">
-          <div className="flex items-center gap-3">
-            <Wand2 className="h-5 w-5 text-indigo-400" />
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Wand2 className="hidden sm:block h-5 w-5 text-indigo-400 shrink-0" />
             <Input
               value={aiPrompt}
               onChange={(e) => setAiPrompt(e.target.value)}
-              placeholder='AI: "Bir BlogPost modeli oluştur: title, content, author relation, published_at date, tags array"'
+              placeholder='AI: "Bir BlogPost modeli oluştur..."'
               className="flex-1 border-indigo-900/50 bg-indigo-950/30"
             />
-            <Button size="sm">
+            <Button size="sm" className="w-full sm:w-auto shrink-0">
               <Wand2 className="mr-2 h-3 w-3" />
               Oluştur
             </Button>

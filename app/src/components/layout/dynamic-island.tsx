@@ -155,9 +155,9 @@ export function DynamicIsland() {
               </span>
             </div>
 
-            {/* Mini nav dots - visible on hover */}
+            {/* Mini nav dots - visible on hover, hidden on mobile */}
             {hovered && (
-              <div className="flex items-center gap-1 ml-1">
+              <div className="hidden sm:flex items-center gap-1 ml-1">
                 <div className="h-px w-3 bg-neutral-700" />
                 {navItems.slice(0, 7).map((item) => (
                   <Link
@@ -192,7 +192,7 @@ export function DynamicIsland() {
 
         {/* Expanded State */}
         {expanded && (
-          <div className="w-[720px] max-h-[80vh] overflow-y-auto rounded-2xl border border-neutral-800 bg-neutral-950/95 shadow-2xl shadow-black/60 backdrop-blur-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-[calc(100vw-2rem)] sm:w-[720px] max-h-[80vh] overflow-y-auto rounded-2xl border border-neutral-800 bg-neutral-950/95 shadow-2xl shadow-black/60 backdrop-blur-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             {/* Header */}
             <div className="flex items-center gap-3 border-b border-neutral-800/50 px-4 py-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">
@@ -251,7 +251,7 @@ export function DynamicIsland() {
               <p className="mb-2 px-1 text-[10px] font-medium uppercase tracking-wider text-neutral-600">
                 Navigasyon
               </p>
-              <div className="grid grid-cols-6 gap-1">
+              <div className="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6">
                 {filteredNav.map((item) => {
                   const isActive = pathname === item.href;
                   return (

@@ -96,15 +96,15 @@ export default function SettingsPage() {
           <CardContent>
             <div className="space-y-2">
               {envVars.map((env) => (
-                <div key={env.key} className="flex items-center gap-3 rounded-lg border border-neutral-800 p-3">
-                  <code className="w-40 text-sm font-mono font-medium text-neutral-200">{env.key}</code>
+                <div key={env.key} className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 sm:flex-row sm:items-center sm:gap-3">
+                  <code className="text-sm font-mono font-medium text-neutral-200 sm:w-40 shrink-0">{env.key}</code>
                   <Input
                     defaultValue={env.value}
                     type={env.sensitive ? "password" : "text"}
                     className="flex-1 font-mono text-xs"
                   />
                   {env.sensitive && (
-                    <Badge variant="warning" className="text-[10px]">sensitive</Badge>
+                    <Badge variant="warning" className="text-[10px] shrink-0">sensitive</Badge>
                   )}
                 </div>
               ))}

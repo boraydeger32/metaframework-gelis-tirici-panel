@@ -147,7 +147,7 @@ export default function TerminalPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Terminal</h1>
           <p className="text-sm text-neutral-400">Sistem komutları ve MetaPanel CLI</p>
@@ -156,7 +156,7 @@ export default function TerminalPage() {
 
       <div className="rounded-xl border border-neutral-800 bg-neutral-950 overflow-hidden shadow-2xl">
         {/* Tab Bar */}
-        <div className="flex items-center gap-0.5 border-b border-neutral-800 bg-neutral-900 px-2 py-1.5">
+        <div className="flex items-center gap-0.5 border-b border-neutral-800 bg-neutral-900 px-2 py-1.5 overflow-x-auto">
           {tabs.map((tab) => (
             <div key={tab.id} className={cn("flex items-center gap-1.5 rounded-md px-3 py-1", tab.active ? "bg-neutral-800 text-neutral-200" : "text-neutral-500 hover:text-neutral-400")}>
               <TerminalIcon className="h-3 w-3" />
@@ -177,7 +177,7 @@ export default function TerminalPage() {
         <div
           ref={scrollRef}
           onClick={() => inputRef.current?.focus()}
-          className="h-[500px] overflow-y-auto p-4 font-mono text-sm cursor-text"
+          className="h-[400px] sm:h-[500px] overflow-y-auto overflow-x-auto p-3 sm:p-4 font-mono text-xs sm:text-sm cursor-text"
         >
           {history.map((line, i) => (
             <div key={i} className="leading-6">

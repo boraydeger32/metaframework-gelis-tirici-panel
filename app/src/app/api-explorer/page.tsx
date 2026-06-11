@@ -100,16 +100,16 @@ export default function ApiExplorerPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">API Explorer</h1>
           <p className="text-sm text-neutral-400">Auto-generated REST endpoint&apos;lerini test edin</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Badge variant="secondary">{endpoints.length} endpoints</Badge>
           <Button variant="outline" size="sm">
             <FileCode className="mr-2 h-3 w-3" />
-            OpenAPI Export
+            Export
           </Button>
         </div>
       </div>
@@ -142,14 +142,14 @@ export default function ApiExplorerPage() {
         {/* Request/Response */}
         <Card className="lg:col-span-2">
           <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Badge className={`font-mono ${methodColors[selected.method]}`}>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-2 overflow-x-auto">
+                <Badge className={`font-mono shrink-0 ${methodColors[selected.method]}`}>
                   {selected.method}
                 </Badge>
-                <code className="text-sm font-mono text-neutral-200">{selected.path}</code>
+                <code className="text-sm font-mono text-neutral-200 truncate">{selected.path}</code>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 shrink-0">
                 <Button variant="outline" size="sm" onClick={handleCopy}>
                   {copied ? <Check className="mr-1 h-3 w-3" /> : <Copy className="mr-1 h-3 w-3" />}
                   cURL

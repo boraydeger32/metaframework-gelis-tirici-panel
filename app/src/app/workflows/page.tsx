@@ -120,17 +120,17 @@ export default function WorkflowsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Workflow Builder</h1>
           <p className="text-sm text-neutral-400">İş akışı ve onay süreçlerini tanımlayın</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
             <Wand2 className="mr-2 h-3 w-3" />
             AI ile Oluştur
           </Button>
-          <Button size="sm">
+          <Button size="sm" className="flex-1 sm:flex-none">
             <Plus className="mr-2 h-3 w-3" />
             Yeni Workflow
           </Button>
@@ -229,11 +229,11 @@ export default function WorkflowsPage() {
               <h3 className="mb-3 text-sm font-semibold text-neutral-300">Transitions</h3>
               <div className="space-y-2">
                 {activeWorkflow.transitions.map((t, i) => (
-                  <div key={i} className="flex items-center gap-3 rounded-lg border border-neutral-800 p-3 hover:border-neutral-700 transition-colors">
-                    <Badge variant="outline" className="text-[10px] font-mono min-w-[80px] justify-center">{t.from}</Badge>
+                  <div key={i} className="flex flex-wrap items-center gap-2 rounded-lg border border-neutral-800 p-3 hover:border-neutral-700 transition-colors sm:gap-3">
+                    <Badge variant="outline" className="text-[10px] font-mono min-w-[60px] justify-center sm:min-w-[80px]">{t.from}</Badge>
                     <ArrowRight className="h-3 w-3 text-neutral-600 shrink-0" />
-                    <Badge variant="outline" className="text-[10px] font-mono min-w-[80px] justify-center">{t.to}</Badge>
-                    <span className="flex-1 text-xs text-neutral-300">{t.label}</span>
+                    <Badge variant="outline" className="text-[10px] font-mono min-w-[60px] justify-center sm:min-w-[80px]">{t.to}</Badge>
+                    <span className="flex-1 text-xs text-neutral-300 basis-full sm:basis-auto">{t.label}</span>
                     {t.condition && (
                       <code className="rounded bg-neutral-800 px-1.5 py-0.5 text-[10px] text-amber-400 font-mono">
                         {t.condition}

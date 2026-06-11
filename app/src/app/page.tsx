@@ -47,12 +47,12 @@ const activityBadge: Record<string, "success" | "warning" | "default"> = {
 export default function DashboardPage() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-neutral-100">Dashboard</h1>
           <p className="text-sm text-neutral-400">Proje durumu ve hızlı işlemler</p>
         </div>
-        <Button asChild>
+        <Button asChild className="w-full sm:w-auto">
           <Link href="/ai-copilot">
             <Zap className="mr-2 h-4 w-4" />
             AI ile Başla
@@ -125,9 +125,9 @@ export default function DashboardPage() {
               {recentActivity.map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-center justify-between rounded-lg border border-neutral-800 p-3"
+                  className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex flex-wrap items-center gap-2">
                     <Badge variant={activityBadge[item.type]}>
                       {item.action}
                     </Badge>

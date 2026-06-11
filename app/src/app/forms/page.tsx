@@ -95,7 +95,7 @@ export default function FormsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Custom Forms</h1>
           <p className="text-sm text-neutral-400">Form builder ve validation schema yönetimi</p>
@@ -106,14 +106,14 @@ export default function FormsPage() {
               <button
                 key={m}
                 onClick={() => setViewMode(m)}
-                className={`flex items-center gap-1 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-xs font-medium transition-colors sm:px-3 ${
                   viewMode === m ? "bg-neutral-800 text-white" : "text-neutral-500 hover:text-neutral-300"
                 }`}
               >
                 {m === "builder" && <Layers className="h-3 w-3" />}
                 {m === "preview" && <Eye className="h-3 w-3" />}
                 {m === "code" && <Code className="h-3 w-3" />}
-                {m === "builder" ? "Builder" : m === "preview" ? "Preview" : "Schema"}
+                <span className="hidden sm:inline">{m === "builder" ? "Builder" : m === "preview" ? "Preview" : "Schema"}</span>
               </button>
             ))}
           </div>
@@ -156,15 +156,15 @@ export default function FormsPage() {
         {/* Form Editor */}
         <Card className="lg:col-span-3">
           <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <CardTitle>İletişim Formu</CardTitle>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm">
-                  <Wand2 className="mr-2 h-3 w-3" />
-                  AI ile Field Ekle
+                <Button variant="outline" size="sm" className="flex-1 sm:flex-none text-xs">
+                  <Wand2 className="mr-1 h-3 w-3" />
+                  AI Field
                 </Button>
-                <Button variant="outline" size="sm">
-                  <Plus className="mr-2 h-3 w-3" />
+                <Button variant="outline" size="sm" className="flex-1 sm:flex-none text-xs">
+                  <Plus className="mr-1 h-3 w-3" />
                   Field Ekle
                 </Button>
               </div>

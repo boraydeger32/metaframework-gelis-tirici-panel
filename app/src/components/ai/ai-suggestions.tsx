@@ -96,7 +96,7 @@ export function AISuggestions() {
   const config = typeConfig[currentSuggestion.type];
 
   return (
-    <div className="fixed top-20 right-6 z-30 w-[320px] animate-in">
+    <div className="fixed top-16 right-3 z-30 w-[calc(100vw-1.5rem)] sm:top-20 sm:right-6 sm:w-[320px] animate-in">
       <div className={cn("rounded-xl border p-4 shadow-xl backdrop-blur-xl", config.color)}>
         <div className="flex items-start gap-3">
           <div className="mt-0.5">

@@ -119,7 +119,7 @@ export default function ThemePage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Theme Engine</h1>
           <p className="text-sm text-neutral-400">Brand renkleri, tipografi ve spacing token&apos;larını yönetin</p>
@@ -139,15 +139,15 @@ export default function ThemePage() {
       {/* AI Color Generator */}
       <Card>
         <CardContent className="p-4">
-          <div className="flex items-center gap-3">
-            <Wand2 className="h-5 w-5 text-purple-400" />
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Wand2 className="hidden sm:block h-5 w-5 text-purple-400 shrink-0" />
             <Input
               value={aiPrompt}
               onChange={(e) => setAiPrompt(e.target.value)}
-              placeholder='AI: "#6366F1 base renginden accessible bir palette oluştur" veya "Fintech temalı koyu renk paleti"'
+              placeholder='AI: "Accessible palette oluştur..."'
               className="flex-1 border-purple-900/50 bg-purple-950/30"
             />
-            <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+            <Button size="sm" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto shrink-0">
               <Wand2 className="mr-2 h-3 w-3" />
               Generate
             </Button>
@@ -212,8 +212,8 @@ export default function ThemePage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 {typographyTokens.map((token) => (
-                  <div key={token.variable} className="flex items-center gap-4 rounded-lg border border-neutral-800 p-3">
-                    <div className="w-40">
+                  <div key={token.variable} className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 sm:flex-row sm:items-center sm:gap-4">
+                    <div className="sm:w-40">
                       <p className="text-sm font-medium text-neutral-200">{token.name}</p>
                       <p className="text-[10px] text-neutral-500 font-mono">{token.variable}</p>
                     </div>
@@ -231,8 +231,8 @@ export default function ThemePage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 {spacingTokens.map((token) => (
-                  <div key={token.variable} className="flex items-center gap-4 rounded-lg border border-neutral-800 p-3">
-                    <div className="w-40">
+                  <div key={token.variable} className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 sm:flex-row sm:items-center sm:gap-4">
+                    <div className="sm:w-40">
                       <p className="text-sm font-medium text-neutral-200">{token.name}</p>
                       <p className="text-[10px] text-neutral-500 font-mono">{token.variable}</p>
                     </div>

@@ -98,7 +98,7 @@ export default function DataPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Data Manager</h1>
           <p className="text-sm text-neutral-400">Kayıtları görüntüle, filtrele ve yönet</p>
@@ -119,15 +119,15 @@ export default function DataPage() {
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         {/* Model Selector */}
-        <div className="flex rounded-lg border border-neutral-800 p-0.5">
+        <div className="flex overflow-x-auto rounded-lg border border-neutral-800 p-0.5">
           {models.map((m) => (
             <button
               key={m}
               onClick={() => setActiveModel(m)}
               className={cn(
-                "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
+                "rounded-md px-3 py-1.5 text-xs font-medium transition-colors whitespace-nowrap",
                 activeModel === m ? "bg-neutral-800 text-neutral-100" : "text-neutral-500 hover:text-neutral-300"
               )}
             >
@@ -136,7 +136,7 @@ export default function DataPage() {
           ))}
         </div>
 
-        <div className="ml-auto flex items-center gap-1 rounded-lg border border-neutral-800 p-0.5">
+        <div className="sm:ml-auto flex items-center gap-1 rounded-lg border border-neutral-800 p-0.5 self-end">
           {([
             { mode: "list" as ViewMode, icon: List, label: "List" },
             { mode: "kanban" as ViewMode, icon: Columns3, label: "Kanban" },
@@ -158,8 +158,8 @@ export default function DataPage() {
       </div>
 
       {/* Filters */}
-      <div className="flex items-center gap-3">
-        <div className="relative flex-1 max-w-sm">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="relative flex-1 sm:max-w-sm">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
           <Input placeholder="Kayıt ara..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
         </div>

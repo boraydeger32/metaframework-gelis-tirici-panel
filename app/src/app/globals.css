@@ -3,8 +3,9 @@
 @theme inline {
   --color-background: #050510;
   --color-foreground: #e8eaf6;
-  --font-sans: "SF Pro Display", -apple-system, "Inter", system-ui, sans-serif;
-  --font-mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+  /* Cross-platform font stack: Apple → Windows → Linux → generic */
+  --font-sans: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Roboto", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "Cascadia Code", "JetBrains Mono", "Fira Code", "Consolas", "Ubuntu Mono", ui-monospace, monospace;
 
   /* Apple Liquid Glass */
   --glass-blur: 60px;
@@ -68,8 +69,20 @@ html, body {
   font-weight: 300;
   letter-spacing: 0.01em;
   min-height: 100vh;
+  min-height: 100dvh; /* dynamic viewport height — iOS Safari */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%; /* prevent font size inflation on iOS */
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent; /* remove blue tap highlight on mobile */
+  overflow-x: hidden; /* prevent horizontal scroll on mobile */
+}
+
+/* iOS safe area support */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 /* Ambient gradient mesh */
@@ -217,11 +230,45 @@ code, kbd, pre {
     0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
+/* ─── Backdrop-filter fallback (older browsers) ─── */
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-card {
+    background: rgba(15, 15, 35, 0.85);
+  }
+  .glass-pill {
+    background: rgba(15, 15, 35, 0.90);
+  }
+  .glass-heavy {
+    background: rgba(10, 10, 30, 0.95);
+  }
+}
+
 /* ─── Premium Interactions ─── */
 
-/* Smooth spring transition for interactive elements */
+/* Smooth transition for interactive elements */
 button, a, [role="button"] {
   transition: all 0.25s var(--ease-out-expo);
+  -webkit-touch-callout: none; /* prevent iOS callout on long press */
+}
+
+/* Minimum touch target — WCAG / Apple HIG: 44x44px on mobile */
+@media (pointer: coarse) {
+  button, a, [role="button"], input, select, textarea {
+    min-height: 44px;
+  }
+
+  /* Disable hover effects on touch — they stick on mobile */
+  .glass-card:hover {
+    transform: none;
+  }
+}
+
+/* Only apply hover lift on devices with hover capability */
+@media (hover: hover) and (pointer: fine) {
+  .glass-card:hover {
+    transform: translateY(-1px);
+  }
 }
 
 /* Focus ring — premium glow */
@@ -230,6 +277,21 @@ button, a, [role="button"] {
   box-shadow:
     0 0 0 2px rgba(99, 102, 241, 0.4),
     0 0 20px rgba(99, 102, 241, 0.15);
+}
+
+/* ─── Print ─── */
+@media print {
+  .ambient-orb, .noise-overlay, body::before,
+  .glass-pill, footer {
+    display: none !important;
+  }
+  .glass-card {
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
 }
 
 /* ─── Utilities ─── */

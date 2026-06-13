@@ -175,7 +175,7 @@ export function ContextualDock() {
   const config = dockConfigs[pathname] || dockConfigs["/"];
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-2rem)] sm:bottom-6">
+    <div className="fixed left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-2rem)] sm:bottom-8" style={{ bottom: "max(1rem, calc(env(safe-area-inset-bottom) + 0.5rem))" }}>
       <div className="glass-pill flex items-end gap-1 rounded-2xl px-2 py-2 overflow-x-auto">
         {config.actions.map((action, i) => {
           const isHovered = hoveredIndex === i;

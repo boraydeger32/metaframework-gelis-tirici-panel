@@ -23,6 +23,26 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "MetaPanel - AI-First Developer Panel",
   description: "AI-native developer panel for building custom applications",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    viewportFit: "cover",          // iOS safe area
+  },
+  themeColor: "#050510",           // Android status bar / Safari tab bar
+  appleWebApp: {
+    capable: true,
+    title: "MetaPanel",
+    statusBarStyle: "black-translucent",
+  },
+  formatDetection: {
+    telephone: false,               // prevent auto-linking numbers on iOS
+  },
+  other: {
+    "mobile-web-app-capable": "yes",           // Android PWA
+    "msapplication-TileColor": "#050510",       // Windows tiles
+    "msapplication-navbutton-color": "#050510", // Windows Phone
+  },
 };
 
 export default function RootLayout({

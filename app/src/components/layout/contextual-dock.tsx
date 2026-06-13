@@ -176,7 +176,7 @@ export function ContextualDock() {
 
   return (
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 max-w-[calc(100vw-2rem)] sm:bottom-6">
-      <div className="flex items-end gap-1 rounded-2xl border border-neutral-800/80 bg-neutral-950/90 px-2 py-2 shadow-2xl shadow-black/40 backdrop-blur-xl overflow-x-auto">
+      <div className="flex items-end gap-1 rounded-2xl border border-white/10 bg-white/[0.04] px-2 py-2 shadow-2xl shadow-black/40 backdrop-blur-xl overflow-x-auto">
         {config.actions.map((action, i) => {
           const isHovered = hoveredIndex === i;
           const isNeighbor =
@@ -187,7 +187,7 @@ export function ContextualDock() {
               {/* Tooltip */}
               <div
                 className={cn(
-                  "absolute -top-8 rounded-md bg-neutral-800 px-2 py-1 text-[10px] font-medium text-neutral-200 whitespace-nowrap transition-all pointer-events-none",
+                  "absolute -top-8 rounded-md bg-white/[0.08] px-2 py-1 text-[10px] font-medium text-neutral-200 whitespace-nowrap transition-all pointer-events-none",
                   isHovered
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-1"
@@ -249,7 +249,7 @@ export function ContextualDock() {
 
       {/* Page indicator */}
       <div className="mt-1.5 flex justify-center">
-        <span className="rounded-full bg-neutral-900 px-2 py-0.5 text-[9px] font-medium text-neutral-600">
+        <span className="rounded-full bg-white/[0.04] px-2 py-0.5 text-[9px] font-medium text-neutral-600">
           {config.title}
         </span>
       </div>

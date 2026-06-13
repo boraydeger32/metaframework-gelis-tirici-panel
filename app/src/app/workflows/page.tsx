@@ -123,7 +123,7 @@ export default function WorkflowsPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Workflow Builder</h1>
-          <p className="text-sm text-neutral-400">İş akışı ve onay süreçlerini tanımlayın</p>
+          <p className="text-sm text-white/50">İş akışı ve onay süreçlerini tanımlayın</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
@@ -150,12 +150,12 @@ export default function WorkflowsPage() {
                 onClick={() => setActiveWorkflow(wf)}
                 className={cn(
                   "flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition-colors",
-                  activeWorkflow.id === wf.id ? "bg-indigo-600/10 text-indigo-400" : "text-neutral-300 hover:bg-neutral-800"
+                  activeWorkflow.id === wf.id ? "bg-indigo-600/10 text-indigo-400" : "text-white/60 hover:bg-white/[0.08]"
                 )}
               >
                 <div>
                   <p className="font-medium">{wf.name}</p>
-                  <p className="text-[10px] text-neutral-500">Model: {wf.model} · {wf.states.length} state</p>
+                  <p className="text-[10px] text-white/40">Model: {wf.model} · {wf.states.length} state</p>
                 </div>
                 <Badge variant={wf.active ? "success" : "secondary"} className="text-[9px]">
                   {wf.active ? "Aktif" : "Pasif"}
@@ -187,7 +187,7 @@ export default function WorkflowsPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Visual Flow */}
-            <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-6">
+            <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-6">
               <div className="flex flex-wrap items-center justify-center gap-3">
                 {activeWorkflow.states.map((state, i) => {
                   const Icon = stateIcon[state.type] || Circle;
@@ -196,9 +196,9 @@ export default function WorkflowsPage() {
                     <div key={state.id} className="flex items-center gap-3">
                       {i > 0 && (
                         <div className="flex flex-col items-center">
-                          <ArrowRight className="h-4 w-4 text-neutral-600" />
+                          <ArrowRight className="h-4 w-4 text-white/25" />
                           {transition && (
-                            <span className="mt-0.5 text-[8px] text-neutral-600 max-w-[60px] text-center leading-tight">
+                            <span className="mt-0.5 text-[8px] text-white/25 max-w-[60px] text-center leading-tight">
                               {transition.label}
                             </span>
                           )}
@@ -208,11 +208,11 @@ export default function WorkflowsPage() {
                         <div className={cn(
                           "flex h-12 w-12 items-center justify-center rounded-xl border-2 transition-all hover:scale-110 cursor-pointer",
                           state.type === "end" ? "border-dashed" : "border-solid",
-                          state.type === "start" ? "border-neutral-600" : "border-neutral-700"
+                          state.type === "start" ? "border-neutral-600" : "border-white/[0.12]"
                         )}>
                           <div className={cn("h-3 w-3 rounded-full", state.color)} />
                         </div>
-                        <span className="text-[10px] font-medium text-neutral-400 text-center max-w-[70px]">
+                        <span className="text-[10px] font-medium text-white/50 text-center max-w-[70px]">
                           {state.name}
                         </span>
                         {state.type === "start" && <Badge variant="secondary" className="text-[8px]">Start</Badge>}
@@ -226,16 +226,16 @@ export default function WorkflowsPage() {
 
             {/* Transitions Table */}
             <div>
-              <h3 className="mb-3 text-sm font-semibold text-neutral-300">Transitions</h3>
+              <h3 className="mb-3 text-sm font-semibold text-white/60">Transitions</h3>
               <div className="space-y-2">
                 {activeWorkflow.transitions.map((t, i) => (
-                  <div key={i} className="flex flex-wrap items-center gap-2 rounded-lg border border-neutral-800 p-3 hover:border-neutral-700 transition-colors sm:gap-3">
+                  <div key={i} className="flex flex-wrap items-center gap-2 rounded-lg border border-white/[0.08] p-3 hover:border-white/[0.12] transition-colors sm:gap-3">
                     <Badge variant="outline" className="text-[10px] font-mono min-w-[60px] justify-center sm:min-w-[80px]">{t.from}</Badge>
-                    <ArrowRight className="h-3 w-3 text-neutral-600 shrink-0" />
+                    <ArrowRight className="h-3 w-3 text-white/25 shrink-0" />
                     <Badge variant="outline" className="text-[10px] font-mono min-w-[60px] justify-center sm:min-w-[80px]">{t.to}</Badge>
-                    <span className="flex-1 text-xs text-neutral-300 basis-full sm:basis-auto">{t.label}</span>
+                    <span className="flex-1 text-xs text-white/60 basis-full sm:basis-auto">{t.label}</span>
                     {t.condition && (
-                      <code className="rounded bg-neutral-800 px-1.5 py-0.5 text-[10px] text-amber-400 font-mono">
+                      <code className="rounded bg-white/[0.08] px-1.5 py-0.5 text-[10px] text-amber-400 font-mono">
                         {t.condition}
                       </code>
                     )}
@@ -244,8 +244,8 @@ export default function WorkflowsPage() {
                         <Badge key={r} variant="secondary" className="text-[9px]">{r}</Badge>
                       ))}
                     </div>
-                    <button className="rounded p-1 opacity-0 group-hover:opacity-100 hover:bg-neutral-800">
-                      <Trash2 className="h-3 w-3 text-neutral-600" />
+                    <button className="rounded p-1 opacity-0 group-hover:opacity-100 hover:bg-white/[0.08]">
+                      <Trash2 className="h-3 w-3 text-white/25" />
                     </button>
                   </div>
                 ))}

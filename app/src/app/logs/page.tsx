@@ -124,7 +124,7 @@ const levelConfig: Record<LogLevel, { icon: React.ElementType; color: string; bg
   error: { icon: XCircle, color: "text-red-400", bg: "bg-red-600/10" },
   warning: { icon: AlertTriangle, color: "text-amber-400", bg: "bg-amber-600/10" },
   info: { icon: Info, color: "text-blue-400", bg: "bg-blue-600/10" },
-  debug: { icon: Bug, color: "text-neutral-400", bg: "bg-neutral-600/10" },
+  debug: { icon: Bug, color: "text-white/50", bg: "bg-neutral-600/10" },
 };
 
 const levelBadge: Record<LogLevel, "destructive" | "warning" | "default" | "secondary"> = {
@@ -164,7 +164,7 @@ export default function LogsPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">System Logs</h1>
-          <p className="text-sm text-neutral-400">Hata logları ve sistem konsolu</p>
+          <p className="text-sm text-white/50">Hata logları ve sistem konsolu</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm">
@@ -191,14 +191,14 @@ export default function LogsPage() {
                 "rounded-xl border p-3 text-left transition-all",
                 filter === level
                   ? "border-indigo-600/50 bg-indigo-950/20"
-                  : "border-neutral-800 bg-neutral-900 hover:border-neutral-700"
+                  : "border-white/[0.08] bg-white/[0.04] hover:border-white/[0.12]"
               )}
             >
               <div className="flex items-center gap-2">
                 <Icon className={cn("h-4 w-4", config.color)} />
-                <span className="text-lg font-bold text-neutral-100">{counts[level]}</span>
+                <span className="text-lg font-bold text-white/90">{counts[level]}</span>
               </div>
-              <p className="mt-0.5 text-[10px] uppercase tracking-wider text-neutral-500">{level}</p>
+              <p className="mt-0.5 text-[10px] uppercase tracking-wider text-white/40">{level}</p>
             </button>
           );
         })}
@@ -207,11 +207,11 @@ export default function LogsPage() {
       {/* Search */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1 sm:max-w-sm">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
           <Input placeholder="Log ara..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
         </div>
         <Badge variant="secondary" className="text-[10px]">{filtered.length} kayıt</Badge>
-        <div className="ml-auto flex items-center gap-1.5 text-[10px] text-neutral-600">
+        <div className="ml-auto flex items-center gap-1.5 text-[10px] text-white/25">
           <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           Live
         </div>
@@ -219,14 +219,14 @@ export default function LogsPage() {
 
       {/* Log Entries */}
       <Card>
-        <CardContent className="p-0 divide-y divide-neutral-800/50">
+        <CardContent className="p-0 divide-y divide-white/[0.06]">
           {filtered.map((log) => {
             const config = levelConfig[log.level];
             const Icon = config.icon;
             const isExpanded = expandedId === log.id;
 
             return (
-              <div key={log.id} className="hover:bg-neutral-800/20 transition-colors">
+              <div key={log.id} className="hover:bg-white/[0.03] transition-colors">
                 <button
                   onClick={() => setExpandedId(isExpanded ? null : log.id)}
                   className="flex w-full items-start gap-3 px-4 py-3 text-left"
@@ -241,28 +241,28 @@ export default function LogsPage() {
                         <Badge variant="secondary" className="text-[9px]">x{log.count}</Badge>
                       )}
                     </div>
-                    <p className="mt-1 text-xs font-mono text-neutral-200 truncate">{log.message}</p>
-                    <p className="mt-0.5 text-[10px] text-neutral-600">{log.source}</p>
+                    <p className="mt-1 text-xs font-mono text-white/80 truncate">{log.message}</p>
+                    <p className="mt-0.5 text-[10px] text-white/25">{log.source}</p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
-                    <span className="flex items-center gap-1 text-[10px] text-neutral-600">
+                    <span className="flex items-center gap-1 text-[10px] text-white/25">
                       <Clock className="h-3 w-3" />
                       {log.timestamp}
                     </span>
                     {log.stack && (
-                      isExpanded ? <ChevronDown className="h-3 w-3 text-neutral-600" /> : <ChevronRight className="h-3 w-3 text-neutral-600" />
+                      isExpanded ? <ChevronDown className="h-3 w-3 text-white/25" /> : <ChevronRight className="h-3 w-3 text-white/25" />
                     )}
                   </div>
                 </button>
 
                 {/* Stack Trace */}
                 {isExpanded && log.stack && (
-                  <div className="mx-4 mb-3 rounded-lg bg-neutral-950 border border-neutral-800 overflow-hidden">
-                    <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-900 border-b border-neutral-800">
-                      <span className="text-[10px] text-neutral-500 font-mono">Stack Trace</span>
+                  <div className="mx-4 mb-3 rounded-lg bg-white/[0.02] border border-white/[0.08] overflow-hidden">
+                    <div className="flex items-center justify-between px-3 py-1.5 bg-white/[0.04] border-b border-white/[0.08]">
+                      <span className="text-[10px] text-white/40 font-mono">Stack Trace</span>
                       <button
                         onClick={(e) => { e.stopPropagation(); handleCopy(log.stack!, log.id); }}
-                        className="text-neutral-500 hover:text-neutral-300"
+                        className="text-white/40 hover:text-white/60"
                       >
                         {copied === log.id ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                       </button>

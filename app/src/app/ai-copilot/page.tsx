@@ -148,7 +148,7 @@ export default function AICopilotPage() {
             <Sparkles className="h-6 w-6 text-indigo-400" />
             AI Copilot
           </h1>
-          <p className="text-sm text-neutral-400">
+          <p className="text-sm text-white/50">
             Doğal dil ile schema, modül ve API oluşturun
           </p>
         </div>
@@ -169,14 +169,14 @@ export default function AICopilotPage() {
             <button
               key={s.label}
               onClick={() => handleSend(s.prompt)}
-              className="flex items-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900 p-4 text-left transition-colors hover:border-indigo-800 hover:bg-indigo-950/20"
+              className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.04] p-4 text-left transition-colors hover:border-indigo-800 hover:bg-indigo-950/20"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600/10">
                 <s.icon className="h-4 w-4 text-indigo-400" />
               </div>
               <div>
-                <p className="text-sm font-medium text-neutral-200">{s.label}</p>
-                <p className="mt-0.5 text-xs text-neutral-500 line-clamp-1">{s.prompt}</p>
+                <p className="text-sm font-medium text-white/80">{s.label}</p>
+                <p className="mt-0.5 text-xs text-white/40 line-clamp-1">{s.prompt}</p>
               </div>
             </button>
           ))}
@@ -196,8 +196,8 @@ export default function AICopilotPage() {
                   msg.role === "user"
                     ? "bg-indigo-600 text-white"
                     : msg.role === "system"
-                    ? "bg-neutral-800/50 text-neutral-300 border border-neutral-800"
-                    : "bg-neutral-800 text-neutral-200"
+                    ? "bg-white/[0.06] text-white/60 border border-white/[0.08]"
+                    : "bg-white/[0.08] text-white/80"
                 }`}
               >
                 {msg.role === "assistant" && (
@@ -216,10 +216,10 @@ export default function AICopilotPage() {
                       const parts = line.replace("- `", "").split("` — ");
                       return (
                         <p key={i} className="ml-2">
-                          <code className="rounded bg-neutral-900 px-1 py-0.5 text-xs text-indigo-300">
+                          <code className="rounded bg-white/[0.04] px-1 py-0.5 text-xs text-indigo-300">
                             {parts[0]?.replace("`", "")}
                           </code>
-                          {parts[1] && <span className="text-neutral-400"> — {parts[1]}</span>}
+                          {parts[1] && <span className="text-white/50"> — {parts[1]}</span>}
                         </p>
                       );
                     }
@@ -228,8 +228,8 @@ export default function AICopilotPage() {
                 </div>
 
                 {msg.codeBlock && (
-                  <div className="mt-3 rounded-lg bg-neutral-950 border border-neutral-800 overflow-hidden">
-                    <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-900 border-b border-neutral-800">
+                  <div className="mt-3 rounded-lg bg-white/[0.02] border border-white/[0.08] overflow-hidden">
+                    <div className="flex items-center justify-between px-3 py-1.5 bg-white/[0.04] border-b border-white/[0.08]">
                       <Badge variant="secondary" className="text-[10px]">
                         {msg.codeBlock.language}
                       </Badge>
@@ -247,7 +247,7 @@ export default function AICopilotPage() {
                         {copied === msg.id ? "Copied" : "Copy"}
                       </Button>
                     </div>
-                    <pre className="p-3 text-xs font-mono text-neutral-300 overflow-x-auto">
+                    <pre className="p-3 text-xs font-mono text-white/60 overflow-x-auto">
                       <code>{msg.codeBlock.code}</code>
                     </pre>
                   </div>
@@ -273,24 +273,24 @@ export default function AICopilotPage() {
 
           {isLoading && (
             <div className="flex justify-start">
-              <div className="flex items-center gap-2 rounded-lg bg-neutral-800 px-4 py-3">
+              <div className="flex items-center gap-2 rounded-lg bg-white/[0.08] px-4 py-3">
                 <Loader2 className="h-4 w-4 animate-spin text-indigo-400" />
-                <span className="text-sm text-neutral-400">Düşünüyorum...</span>
+                <span className="text-sm text-white/50">Düşünüyorum...</span>
               </div>
             </div>
           )}
         </div>
 
         {/* Input */}
-        <div className="border-t border-neutral-800 p-4">
+        <div className="border-t border-white/[0.08] p-4">
           <div className="flex items-center gap-3">
-            <Terminal className="h-5 w-5 text-neutral-500" />
+            <Terminal className="h-5 w-5 text-white/40" />
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
               placeholder="Bir model oluştur, modül ekle, tema düzenle..."
-              className="flex-1 bg-transparent text-sm text-neutral-200 placeholder:text-neutral-600 focus:outline-none"
+              className="flex-1 bg-transparent text-sm text-white/80 placeholder:text-white/25 focus:outline-none"
             />
             <Button
               size="sm"

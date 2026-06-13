@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((mod) => mod.default), { ssr: false, loading: () => <div className="flex h-[400px] items-center justify-center bg-neutral-950 text-neutral-600 text-sm">Editor yükleniyor...</div> });
+const MonacoEditor = dynamic(() => import("@monaco-editor/react").then((mod) => mod.default), { ssr: false, loading: () => <div className="flex h-[400px] items-center justify-center bg-white/[0.02] text-white/25 text-sm">Editor yükleniyor...</div> });
 
 const fileTree = [
   { type: "folder" as const, name: "models", children: [
@@ -130,7 +130,7 @@ export default function CodeEditorPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Code Editor</h1>
-          <p className="text-sm text-neutral-400">AI destekli kod düzenleme</p>
+          <p className="text-sm text-white/50">AI destekli kod düzenleme</p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" size="sm"><Wand2 className="mr-2 h-3 w-3" />AI Açıkla</Button>
@@ -148,7 +148,7 @@ export default function CodeEditorPage() {
               <div key={item.name}>
                 <button
                   onClick={() => toggleFolder(item.name)}
-                  className="flex w-full items-center gap-1.5 rounded px-2 py-1 text-[11px] text-neutral-400 hover:bg-neutral-800 transition-colors"
+                  className="flex w-full items-center gap-1.5 rounded px-2 py-1 text-[11px] text-white/50 hover:bg-white/[0.08] transition-colors"
                 >
                   <ChevronRight className={cn("h-3 w-3 transition-transform", openFolders.has(item.name) && "rotate-90")} />
                   <FolderOpen className="h-3 w-3 text-amber-400" />
@@ -160,7 +160,7 @@ export default function CodeEditorPage() {
                     onClick={() => setActiveFile(child.name)}
                     className={cn(
                       "flex w-full items-center gap-1.5 rounded px-2 py-1 pl-7 text-[11px] transition-colors",
-                      activeFile === child.name ? "bg-indigo-600/10 text-indigo-400" : "text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300"
+                      activeFile === child.name ? "bg-indigo-600/10 text-indigo-400" : "text-white/40 hover:bg-white/[0.08] hover:text-white/60"
                     )}
                   >
                     <File className="h-3 w-3" />
@@ -174,14 +174,14 @@ export default function CodeEditorPage() {
 
         {/* Editor */}
         <Card className="lg:col-span-3 overflow-hidden">
-          <div className="flex items-center justify-between border-b border-neutral-800 px-4 py-2">
+          <div className="flex items-center justify-between border-b border-white/[0.08] px-4 py-2">
             <div className="flex items-center gap-2">
               <Badge variant="outline" className="text-[9px] font-mono">{activeFile}</Badge>
               <Badge variant="secondary" className="text-[9px]">TypeScript</Badge>
             </div>
             <button
               onClick={() => { navigator.clipboard.writeText(fileContents[activeFile] || ""); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
-              className="text-neutral-500 hover:text-neutral-300"
+              className="text-white/40 hover:text-white/60"
             >
               {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             </button>

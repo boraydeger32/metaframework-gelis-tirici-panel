@@ -103,7 +103,7 @@ export default function ApiExplorerPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">API Explorer</h1>
-          <p className="text-sm text-neutral-400">Auto-generated REST endpoint&apos;lerini test edin</p>
+          <p className="text-sm text-white/50">Auto-generated REST endpoint&apos;lerini test edin</p>
         </div>
         <div className="flex items-center gap-2">
           <Badge variant="secondary">{endpoints.length} endpoints</Badge>
@@ -126,14 +126,14 @@ export default function ApiExplorerPage() {
                 key={i}
                 onClick={() => { setSelected(ep); setResponseVisible(false); }}
                 className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-                  selected === ep ? "bg-neutral-800" : "hover:bg-neutral-800/50"
+                  selected === ep ? "bg-white/[0.08]" : "hover:bg-white/[0.06]"
                 }`}
               >
                 <Badge className={`text-[10px] font-mono ${methodColors[ep.method]}`}>
                   {ep.method}
                 </Badge>
-                <code className="flex-1 text-xs font-mono text-neutral-300 truncate">{ep.path}</code>
-                {ep.auth && <Lock className="h-3 w-3 text-neutral-600" />}
+                <code className="flex-1 text-xs font-mono text-white/60 truncate">{ep.path}</code>
+                {ep.auth && <Lock className="h-3 w-3 text-white/25" />}
               </button>
             ))}
           </CardContent>
@@ -147,7 +147,7 @@ export default function ApiExplorerPage() {
                 <Badge className={`font-mono shrink-0 ${methodColors[selected.method]}`}>
                   {selected.method}
                 </Badge>
-                <code className="text-sm font-mono text-neutral-200 truncate">{selected.path}</code>
+                <code className="text-sm font-mono text-white/80 truncate">{selected.path}</code>
               </div>
               <div className="flex gap-2 shrink-0">
                 <Button variant="outline" size="sm" onClick={handleCopy}>
@@ -162,7 +162,7 @@ export default function ApiExplorerPage() {
             </div>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-sm text-neutral-400">{selected.description}</p>
+            <p className="text-sm text-white/50">{selected.description}</p>
 
             {selected.auth && (
               <div className="flex items-center gap-2 rounded-lg border border-amber-800/30 bg-amber-950/20 p-3 text-xs text-amber-400">
@@ -173,11 +173,11 @@ export default function ApiExplorerPage() {
 
             {selected.params.length > 0 && (
               <div>
-                <p className="mb-2 text-xs font-medium text-neutral-500">Parameters</p>
+                <p className="mb-2 text-xs font-medium text-white/40">Parameters</p>
                 <div className="space-y-2">
                   {selected.params.map((p) => (
                     <div key={p} className="flex items-center gap-2">
-                      <code className="w-24 text-xs font-mono text-neutral-400">{p}</code>
+                      <code className="w-24 text-xs font-mono text-white/50">{p}</code>
                       <Input placeholder={`${p} değeri`} className="text-xs" />
                     </div>
                   ))}
@@ -188,10 +188,10 @@ export default function ApiExplorerPage() {
             {responseVisible && (
               <div>
                 <div className="mb-2 flex items-center gap-2">
-                  <p className="text-xs font-medium text-neutral-500">Response</p>
+                  <p className="text-xs font-medium text-white/40">Response</p>
                   <Badge variant="success" className="text-[10px]">200 OK</Badge>
                 </div>
-                <pre className="rounded-lg bg-neutral-950 p-4 text-xs font-mono text-emerald-300 overflow-auto">
+                <pre className="rounded-lg bg-white/[0.02] p-4 text-xs font-mono text-emerald-300 overflow-auto">
                   {selected.response}
                 </pre>
               </div>

@@ -45,7 +45,7 @@ export default function ReportsPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Report Builder</h1>
-          <p className="text-sm text-neutral-400">Özel sorgular ve raporlar oluşturun</p>
+          <p className="text-sm text-white/50">Özel sorgular ve raporlar oluşturun</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" className="flex-1 sm:flex-none">
@@ -67,11 +67,11 @@ export default function ReportsPage() {
           </CardHeader>
           <CardContent className="space-y-1">
             {savedReports.map((r) => (
-              <button key={r.id} className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-neutral-800 transition-colors">
+              <button key={r.id} className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm hover:bg-white/[0.08] transition-colors">
                 {r.type === "chart" ? <PieChart className="h-3.5 w-3.5 text-indigo-400" /> : <Table className="h-3.5 w-3.5 text-emerald-400" />}
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-neutral-200 truncate">{r.name}</p>
-                  <p className="text-[10px] text-neutral-500">{r.model} · {r.lastRun}</p>
+                  <p className="text-xs font-medium text-white/80 truncate">{r.name}</p>
+                  <p className="text-[10px] text-white/40">{r.model} · {r.lastRun}</p>
                 </div>
               </button>
             ))}
@@ -99,7 +99,7 @@ export default function ReportsPage() {
             </CardHeader>
             {showSql && (
               <CardContent>
-                <pre className="rounded-lg bg-neutral-950 border border-neutral-800 p-4 text-xs font-mono text-emerald-300 overflow-auto whitespace-pre-wrap">
+                <pre className="rounded-lg bg-white/[0.02] border border-white/[0.08] p-4 text-xs font-mono text-emerald-300 overflow-auto whitespace-pre-wrap">
                   {sqlQuery}
                 </pre>
               </CardContent>
@@ -110,19 +110,19 @@ export default function ReportsPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Badge variant="secondary" className="text-[10px]">{sampleRows.length} sonuç</Badge>
-              <span className="text-[10px] text-neutral-600">0.023s</span>
+              <span className="text-[10px] text-white/25">0.023s</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex rounded-lg border border-neutral-800 p-0.5">
+              <div className="flex rounded-lg border border-white/[0.08] p-0.5">
                 <button
                   onClick={() => setViewMode("table")}
-                  className={cn("flex items-center gap-1 rounded-md px-2.5 py-1 text-[10px] font-medium", viewMode === "table" ? "bg-neutral-800 text-white" : "text-neutral-500")}
+                  className={cn("flex items-center gap-1 rounded-md px-2.5 py-1 text-[10px] font-medium", viewMode === "table" ? "bg-white/[0.08] text-white" : "text-white/40")}
                 >
                   <Table className="h-3 w-3" /> Tablo
                 </button>
                 <button
                   onClick={() => setViewMode("chart")}
-                  className={cn("flex items-center gap-1 rounded-md px-2.5 py-1 text-[10px] font-medium", viewMode === "chart" ? "bg-neutral-800 text-white" : "text-neutral-500")}
+                  className={cn("flex items-center gap-1 rounded-md px-2.5 py-1 text-[10px] font-medium", viewMode === "chart" ? "bg-white/[0.08] text-white" : "text-white/40")}
                 >
                   <BarChart3 className="h-3 w-3" /> Grafik
                 </button>
@@ -141,17 +141,17 @@ export default function ReportsPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-neutral-800 text-left">
+                      <tr className="border-b border-white/[0.08] text-left">
                         {sampleColumns.map((col) => (
-                          <th key={col} className="px-4 py-3 text-xs font-medium text-neutral-500">{col}</th>
+                          <th key={col} className="px-4 py-3 text-xs font-medium text-white/40">{col}</th>
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-neutral-800/50">
+                    <tbody className="divide-y divide-white/[0.06]">
                       {sampleRows.map((row, i) => (
-                        <tr key={i} className="hover:bg-neutral-800/30 transition-colors">
+                        <tr key={i} className="hover:bg-white/[0.04] transition-colors">
                           {row.map((cell, j) => (
-                            <td key={j} className={cn("px-4 py-3 text-xs", j === 0 ? "text-neutral-500 font-mono" : "text-neutral-300")}>
+                            <td key={j} className={cn("px-4 py-3 text-xs", j === 0 ? "text-white/40 font-mono" : "text-white/60")}>
                               {cell}
                             </td>
                           ))}
@@ -170,28 +170,28 @@ export default function ReportsPage() {
                   <div className="flex items-end gap-3 h-48">
                     {chartData.map((d) => (
                       <div key={d.month} className="flex flex-1 flex-col items-center gap-1">
-                        <span className="text-[10px] text-neutral-400">{d.value}</span>
+                        <span className="text-[10px] text-white/50">{d.value}</span>
                         <div
                           className="w-full rounded-t-md bg-gradient-to-t from-indigo-600 to-indigo-400 transition-all hover:from-indigo-500 hover:to-indigo-300"
                           style={{ height: `${(d.value / maxValue) * 100}%` }}
                         />
-                        <span className="text-[10px] text-neutral-500">{d.month}</span>
+                        <span className="text-[10px] text-white/40">{d.month}</span>
                       </div>
                     ))}
                   </div>
                   {/* Summary */}
-                  <div className="grid grid-cols-3 gap-3 border-t border-neutral-800 pt-4">
+                  <div className="grid grid-cols-3 gap-3 border-t border-white/[0.08] pt-4">
                     <div className="text-center">
-                      <p className="text-lg font-bold text-neutral-100">1,290</p>
-                      <p className="text-[10px] text-neutral-500">Toplam</p>
+                      <p className="text-lg font-bold text-white/90">1,290</p>
+                      <p className="text-[10px] text-white/40">Toplam</p>
                     </div>
                     <div className="text-center">
                       <p className="text-lg font-bold text-emerald-400">+28%</p>
-                      <p className="text-[10px] text-neutral-500">Büyüme</p>
+                      <p className="text-[10px] text-white/40">Büyüme</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-lg font-bold text-neutral-100">215</p>
-                      <p className="text-[10px] text-neutral-500">Ortalama</p>
+                      <p className="text-lg font-bold text-white/90">215</p>
+                      <p className="text-[10px] text-white/40">Ortalama</p>
                     </div>
                   </div>
                 </div>

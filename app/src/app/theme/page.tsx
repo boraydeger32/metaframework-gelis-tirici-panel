@@ -1,44 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Palette, Copy, Download, RotateCcw, Wand2, Sun, Moon, Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-
-interface ColorToken {
-  name: string;
-  variable: string;
-  value: string;
-}
-
-const initialColors: Record<string, ColorToken[]> = {
-  Primary: [
-    { name: "50", variable: "--primary-50", value: "#eef2ff" },
-    { name: "100", variable: "--primary-100", value: "#e0e7ff" },
-    { name: "200", variable: "--primary-200", value: "#c7d2fe" },
-    { name: "300", variable: "--primary-300", value: "#a5b4fc" },
-    { name: "400", variable: "--primary-400", value: "#818cf8" },
-    { name: "500", variable: "--primary-500", value: "#6366f1" },
-    { name: "600", variable: "--primary-600", value: "#4f46e5" },
-    { name: "700", variable: "--primary-700", value: "#4338ca" },
-    { name: "800", variable: "--primary-800", value: "#3730a3" },
-    { name: "900", variable: "--primary-900", value: "#312e81" },
-  ],
-  Secondary: [
-    { name: "50", variable: "--secondary-50", value: "#fdf4ff" },
-    { name: "500", variable: "--secondary-500", value: "#d946ef" },
-    { name: "600", variable: "--secondary-600", value: "#c026d3" },
-    { name: "900", variable: "--secondary-900", value: "#701a75" },
-  ],
-  Semantic: [
-    { name: "success", variable: "--color-success", value: "#10b981" },
-    { name: "warning", variable: "--color-warning", value: "#f59e0b" },
-    { name: "error", variable: "--color-error", value: "#ef4444" },
-    { name: "info", variable: "--color-info", value: "#3b82f6" },
-  ],
-};
+import { useThemeStore, type ColorToken } from "@/stores/theme-store";
+import { useActivityStore } from "@/stores/activity-store";
+import { useToastStore } from "@/stores/toast-store";
 
 const typographyTokens = [
   { name: "Font Family (Sans)", variable: "--font-sans", value: "Inter, system-ui, sans-serif" },
@@ -96,25 +66,76 @@ function generateTailwindConfig(colors: Record<string, ColorToken[]>): string {
 }
 
 export default function ThemePage() {
-  const [colors, setColors] = useState(initialColors);
+  const { colors, updateColor, resetColors } = useThemeStore();
+  const addActivity = useActivityStore((s) => s.addActivity);
+  const addToast = useToastStore((s) => s.addToast);
+
   const [activeTab, setActiveTab] = useState<"colors" | "typography" | "spacing">("colors");
   const [exportFormat, setExportFormat] = useState<"css" | "tailwind">("css");
   const [copied, setCopied] = useState(false);
   const [aiPrompt, setAiPrompt] = useState("");
 
-  const handleColorChange = (group: string, index: number, value: string) => {
-    setColors((prev) => ({
-      ...prev,
-      [group]: prev[group].map((t, i) => (i === index ? { ...t, value } : t)),
-    }));
-  };
+  // Debounced activity logging for color changes
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastChangeRef = useRef<{ group: string; name: string; value: string } | null>(null);
+
+  // Inject CSS variables into document when colors change
+  useEffect(() => {
+    const root = document.documentElement;
+    for (const [, tokens] of Object.entries(colors)) {
+      for (const token of tokens) {
+        root.style.setProperty(token.variable, token.value);
+      }
+    }
+  }, [colors]);
+
+  const handleColorChange = useCallback(
+    (group: string, index: number, value: string) => {
+      updateColor(group, index, value);
+
+      const token = colors[group]?.[index];
+      lastChangeRef.current = { group, name: token?.name || "", value };
+
+      // Debounce activity log: only log after 800ms of no changes
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => {
+        const change = lastChangeRef.current;
+        if (change) {
+          addActivity({
+            action: "Tema rengi degistirildi",
+            target: `${change.group}-${change.name}: ${change.value}`,
+            user: "admin",
+            type: "theme",
+          });
+        }
+      }, 800);
+    },
+    [updateColor, addActivity, colors]
+  );
 
   const handleCopy = () => {
     const output =
       exportFormat === "css" ? generateCSSVars(colors) : generateTailwindConfig(colors);
     navigator.clipboard.writeText(output);
     setCopied(true);
+    addToast(
+      exportFormat === "css"
+        ? "CSS degiskenleri panoya kopyalandi"
+        : "Tailwind config panoya kopyalandi",
+      "success"
+    );
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleReset = () => {
+    resetColors();
+    addToast("Tema renkleri varsayilana sifirlandi", "info");
+    addActivity({
+      action: "Tema renkleri sifirlandi",
+      target: "Tum renkler varsayilan degerlere donduruldu",
+      user: "admin",
+      type: "theme",
+    });
   };
 
   return (
@@ -122,16 +143,16 @@ export default function ThemePage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Theme Engine</h1>
-          <p className="text-sm text-neutral-400">Brand renkleri, tipografi ve spacing token&apos;larını yönetin</p>
+          <p className="text-sm text-white/50">Brand renkleri, tipografi ve spacing token&apos;larini yonetin</p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" onClick={() => setColors(initialColors)}>
+          <Button variant="outline" size="sm" onClick={handleReset}>
             <RotateCcw className="mr-2 h-3 w-3" />
             Reset
           </Button>
           <Button size="sm" onClick={handleCopy}>
             {copied ? <Check className="mr-2 h-3 w-3" /> : <Copy className="mr-2 h-3 w-3" />}
-            {copied ? "Kopyalandı" : "Export"}
+            {copied ? "Kopyalandi" : "Export"}
           </Button>
         </div>
       </div>
@@ -144,7 +165,7 @@ export default function ThemePage() {
             <Input
               value={aiPrompt}
               onChange={(e) => setAiPrompt(e.target.value)}
-              placeholder='AI: "Accessible palette oluştur..."'
+              placeholder='AI: "Accessible palette olustur..."'
               className="flex-1 border-purple-900/50 bg-purple-950/30"
             />
             <Button size="sm" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto shrink-0">
@@ -156,15 +177,15 @@ export default function ThemePage() {
       </Card>
 
       {/* Tabs */}
-      <div className="flex items-center gap-1 rounded-lg border border-neutral-800 p-1 w-fit">
+      <div className="flex items-center gap-1 rounded-lg border border-white/[0.08] p-1 w-fit">
         {(["colors", "typography", "spacing"] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
               activeTab === tab
-                ? "bg-neutral-800 text-neutral-100"
-                : "text-neutral-500 hover:text-neutral-300"
+                ? "bg-white/[0.08] text-white/90"
+                : "text-white/40 hover:text-white/60"
             }`}
           >
             {tab === "colors" ? "Colors" : tab === "typography" ? "Typography" : "Spacing"}
@@ -186,7 +207,7 @@ export default function ThemePage() {
                     {tokens.map((token, i) => (
                       <div key={token.variable} className="space-y-1.5">
                         <div
-                          className="h-12 rounded-lg border border-neutral-700 cursor-pointer relative overflow-hidden"
+                          className="h-12 rounded-lg border border-white/[0.12] cursor-pointer relative overflow-hidden"
                           style={{ backgroundColor: token.value }}
                         >
                           <input
@@ -196,8 +217,8 @@ export default function ThemePage() {
                             className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                           />
                         </div>
-                        <p className="text-xs font-medium text-neutral-300">{token.name}</p>
-                        <p className="text-[10px] text-neutral-500 font-mono">{token.value}</p>
+                        <p className="text-xs font-medium text-white/60">{token.name}</p>
+                        <p className="text-[10px] text-white/40 font-mono">{token.value}</p>
                       </div>
                     ))}
                   </div>
@@ -212,10 +233,10 @@ export default function ThemePage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 {typographyTokens.map((token) => (
-                  <div key={token.variable} className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 sm:flex-row sm:items-center sm:gap-4">
+                  <div key={token.variable} className="flex flex-col gap-2 rounded-lg border border-white/[0.08] p-3 sm:flex-row sm:items-center sm:gap-4">
                     <div className="sm:w-40">
-                      <p className="text-sm font-medium text-neutral-200">{token.name}</p>
-                      <p className="text-[10px] text-neutral-500 font-mono">{token.variable}</p>
+                      <p className="text-sm font-medium text-white/80">{token.name}</p>
+                      <p className="text-[10px] text-white/40 font-mono">{token.variable}</p>
                     </div>
                     <Input defaultValue={token.value} className="flex-1 font-mono text-xs" />
                   </div>
@@ -231,14 +252,14 @@ export default function ThemePage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 {spacingTokens.map((token) => (
-                  <div key={token.variable} className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 sm:flex-row sm:items-center sm:gap-4">
+                  <div key={token.variable} className="flex flex-col gap-2 rounded-lg border border-white/[0.08] p-3 sm:flex-row sm:items-center sm:gap-4">
                     <div className="sm:w-40">
-                      <p className="text-sm font-medium text-neutral-200">{token.name}</p>
-                      <p className="text-[10px] text-neutral-500 font-mono">{token.variable}</p>
+                      <p className="text-sm font-medium text-white/80">{token.name}</p>
+                      <p className="text-[10px] text-white/40 font-mono">{token.variable}</p>
                     </div>
                     <Input defaultValue={token.value} className="w-32 font-mono text-xs" />
                     <div
-                      className="h-8 w-16 rounded border border-neutral-700 bg-indigo-600"
+                      className="h-8 w-16 rounded border border-white/[0.12] bg-indigo-600"
                       style={{ borderRadius: token.value }}
                     />
                   </div>
@@ -255,12 +276,12 @@ export default function ThemePage() {
               <CardTitle className="text-sm">Preview</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="rounded-lg border border-neutral-800 p-4 space-y-3" style={{ backgroundColor: colors.Primary[9]?.value || "#312e81" }}>
+              <div className="rounded-lg border border-white/[0.08] p-4 space-y-3" style={{ backgroundColor: colors.Primary[9]?.value || "#312e81" }}>
                 <h3 className="text-lg font-bold" style={{ color: colors.Primary[0]?.value }}>
                   Sample Heading
                 </h3>
                 <p className="text-sm" style={{ color: colors.Primary[2]?.value }}>
-                  Bu bir önizleme metnidir. Renk token&apos;larınız burada gösterilir.
+                  Bu bir onizleme metnidir. Renk token&apos;lariniz burada gosterilir.
                 </p>
                 <div className="flex gap-2">
                   <button
@@ -299,11 +320,11 @@ export default function ThemePage() {
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
                 <CardTitle className="text-sm">Export</CardTitle>
-                <div className="flex rounded-md border border-neutral-800 p-0.5">
+                <div className="flex rounded-md border border-white/[0.08] p-0.5">
                   <button
                     onClick={() => setExportFormat("css")}
                     className={`rounded px-2 py-1 text-[10px] font-medium ${
-                      exportFormat === "css" ? "bg-neutral-800 text-white" : "text-neutral-500"
+                      exportFormat === "css" ? "bg-white/[0.08] text-white" : "text-white/40"
                     }`}
                   >
                     CSS Vars
@@ -311,7 +332,7 @@ export default function ThemePage() {
                   <button
                     onClick={() => setExportFormat("tailwind")}
                     className={`rounded px-2 py-1 text-[10px] font-medium ${
-                      exportFormat === "tailwind" ? "bg-neutral-800 text-white" : "text-neutral-500"
+                      exportFormat === "tailwind" ? "bg-white/[0.08] text-white" : "text-white/40"
                     }`}
                   >
                     Tailwind
@@ -320,7 +341,7 @@ export default function ThemePage() {
               </div>
             </CardHeader>
             <CardContent>
-              <pre className="max-h-64 overflow-auto rounded-lg bg-neutral-950 p-3 text-[11px] text-neutral-400 font-mono">
+              <pre className="max-h-64 overflow-auto rounded-lg bg-white/[0.02] p-3 text-[11px] text-white/50 font-mono">
                 {exportFormat === "css" ? generateCSSVars(colors) : generateTailwindConfig(colors)}
               </pre>
             </CardContent>

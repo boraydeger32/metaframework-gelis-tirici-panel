@@ -58,7 +58,7 @@ const navItems = [
   { label: "Health", href: "/health", icon: Heart, color: "text-emerald-400" },
   { label: "Docs", href: "/docs", icon: BookOpen, color: "text-blue-400" },
   { label: "Activity", href: "/activity", icon: Activity, color: "text-teal-400" },
-  { label: "Settings", href: "/settings", icon: Settings, color: "text-neutral-400" },
+  { label: "Settings", href: "/settings", icon: Settings, color: "text-white/50" },
 ];
 
 const quickCommands = [
@@ -135,7 +135,7 @@ export function DynamicIsland() {
         {!expanded && (
           <div
             className={cn(
-              "flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950/90 px-2 py-1.5 shadow-2xl shadow-black/50 backdrop-blur-xl transition-all duration-500 cursor-pointer",
+              "flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-2 py-1.5 shadow-2xl shadow-black/40 backdrop-blur-xl transition-all duration-500 cursor-pointer",
               hovered ? "px-4 gap-3" : ""
             )}
             onClick={() => setExpanded(true)}
@@ -150,7 +150,7 @@ export function DynamicIsland() {
             {/* Current page indicator */}
             <div className="flex items-center gap-2">
               <currentPage.icon className={cn("h-3.5 w-3.5 transition-all", currentPage.color)} />
-              <span className="text-xs font-medium text-neutral-300 whitespace-nowrap">
+              <span className="text-xs font-medium text-white/60 whitespace-nowrap">
                 {currentPage.label}
               </span>
             </div>
@@ -167,15 +167,15 @@ export function DynamicIsland() {
                     className={cn(
                       "flex h-6 w-6 items-center justify-center rounded-full transition-all hover:scale-110",
                       pathname === item.href
-                        ? "bg-neutral-800 scale-110"
-                        : "hover:bg-neutral-800/50"
+                        ? "bg-white/[0.08] scale-110"
+                        : "hover:bg-white/[0.08]/50"
                     )}
                     title={item.label}
                   >
                     <item.icon className={cn("h-3 w-3", item.color)} />
                   </Link>
                 ))}
-                <div className="flex h-6 w-6 items-center justify-center rounded-full text-neutral-600">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full text-white/25">
                   <span className="text-[9px]">+{navItems.length - 7}</span>
                 </div>
               </div>
@@ -183,7 +183,7 @@ export function DynamicIsland() {
 
             {/* Search hint */}
             <div className="flex items-center gap-1 ml-1">
-              <kbd className="rounded bg-neutral-800 px-1.5 py-0.5 text-[9px] text-neutral-500 font-mono">
+              <kbd className="rounded bg-white/[0.08] px-1.5 py-0.5 text-[9px] text-white/40 font-mono">
                 ⌘K
               </kbd>
             </div>
@@ -192,28 +192,28 @@ export function DynamicIsland() {
 
         {/* Expanded State */}
         {expanded && (
-          <div className="w-[calc(100vw-2rem)] sm:w-[720px] max-h-[80vh] overflow-y-auto rounded-2xl border border-neutral-800 bg-neutral-950/95 shadow-2xl shadow-black/60 backdrop-blur-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-[calc(100vw-2rem)] sm:w-[720px] max-h-[80vh] overflow-y-auto rounded-2xl glass-heavy overflow-hidden animate-glass-in">
             {/* Header */}
-            <div className="flex items-center gap-3 border-b border-neutral-800/50 px-4 py-3">
+            <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">
                 M
               </div>
 
               {searchMode ? (
                 <div className="flex flex-1 items-center gap-2">
-                  <Search className="h-4 w-4 text-neutral-500" />
+                  <Search className="h-4 w-4 text-white/40" />
                   <input
                     ref={inputRef}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Sayfa, komut veya işlem ara..."
-                    className="flex-1 bg-transparent text-sm text-neutral-200 placeholder:text-neutral-600 focus:outline-none"
+                    className="flex-1 bg-transparent text-sm text-white/80 placeholder:text-white/25 focus:outline-none"
                     autoFocus
                   />
                 </div>
               ) : (
                 <div className="flex flex-1 items-center gap-2">
-                  <span className="text-sm font-semibold text-neutral-100">MetaPanel</span>
+                  <span className="text-sm font-semibold text-white/90">MetaPanel</span>
                   <span className="rounded-md bg-indigo-600/20 px-1.5 py-0.5 text-[10px] text-indigo-400">
                     dev
                   </span>
@@ -227,7 +227,7 @@ export function DynamicIsland() {
                       setSearchMode(true);
                       setTimeout(() => inputRef.current?.focus(), 50);
                     }}
-                    className="flex h-7 items-center gap-1 rounded-lg bg-neutral-800/50 px-2 text-neutral-500 hover:text-neutral-300 transition-colors"
+                    className="flex h-7 items-center gap-1 rounded-lg bg-white/[0.08]/50 px-2 text-white/40 hover:text-white/60 transition-colors"
                   >
                     <Search className="h-3 w-3" />
                     <span className="text-[10px]">Ara</span>
@@ -239,7 +239,7 @@ export function DynamicIsland() {
                     setSearchMode(false);
                     setSearchQuery("");
                   }}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 transition-colors"
+                  className="flex h-7 w-7 items-center justify-center rounded-lg text-white/40 hover:bg-white/[0.08] hover:text-white/60 transition-colors"
                 >
                   <X className="h-3.5 w-3.5" />
                 </button>
@@ -248,7 +248,7 @@ export function DynamicIsland() {
 
             {/* Navigation Grid */}
             <div className="p-3">
-              <p className="mb-2 px-1 text-[10px] font-medium uppercase tracking-wider text-neutral-600">
+              <p className="mb-2 px-1 text-[10px] font-medium uppercase tracking-wider text-white/25">
                 Navigasyon
               </p>
               <div className="grid grid-cols-3 gap-1 sm:grid-cols-4 md:grid-cols-6">
@@ -266,14 +266,14 @@ export function DynamicIsland() {
                       className={cn(
                         "flex flex-col items-center gap-1.5 rounded-xl p-3 transition-all",
                         isActive
-                          ? "bg-neutral-800 ring-1 ring-neutral-700"
-                          : "hover:bg-neutral-800/50"
+                          ? "bg-white/[0.08] ring-1 ring-neutral-700"
+                          : "hover:bg-white/[0.08]/50"
                       )}
                     >
                       <div
                         className={cn(
                           "flex h-9 w-9 items-center justify-center rounded-lg transition-all",
-                          isActive ? "bg-neutral-700" : "bg-neutral-800/80"
+                          isActive ? "bg-neutral-700" : "bg-white/[0.08]/80"
                         )}
                       >
                         <item.icon className={cn("h-4 w-4", item.color)} />
@@ -281,7 +281,7 @@ export function DynamicIsland() {
                       <span
                         className={cn(
                           "text-[10px] font-medium",
-                          isActive ? "text-neutral-200" : "text-neutral-500"
+                          isActive ? "text-white/80" : "text-white/40"
                         )}
                       >
                         {item.label}
@@ -294,8 +294,8 @@ export function DynamicIsland() {
 
             {/* Quick Commands */}
             {filteredCommands.length > 0 && (
-              <div className="border-t border-neutral-800/50 p-3">
-                <p className="mb-2 px-1 text-[10px] font-medium uppercase tracking-wider text-neutral-600">
+              <div className="border-t border-white/[0.06] p-3">
+                <p className="mb-2 px-1 text-[10px] font-medium uppercase tracking-wider text-white/25">
                   Hızlı Komutlar
                 </p>
                 <div className="space-y-0.5">
@@ -308,16 +308,16 @@ export function DynamicIsland() {
                         setSearchMode(false);
                         setSearchQuery("");
                       }}
-                      className="flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-neutral-800/50 group"
+                      className="flex items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-white/[0.08]/50 group"
                     >
-                      <div className="flex h-7 w-7 items-center justify-center rounded-md bg-neutral-800">
-                        <cmd.icon className="h-3.5 w-3.5 text-neutral-400" />
+                      <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white/[0.08]">
+                        <cmd.icon className="h-3.5 w-3.5 text-white/50" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-xs font-medium text-neutral-300">{cmd.label}</p>
-                        <p className="text-[10px] text-neutral-600">{cmd.hint}</p>
+                        <p className="text-xs font-medium text-white/60">{cmd.label}</p>
+                        <p className="text-[10px] text-white/25">{cmd.hint}</p>
                       </div>
-                      <ChevronRight className="h-3 w-3 text-neutral-700 group-hover:text-neutral-500 transition-colors" />
+                      <ChevronRight className="h-3 w-3 text-white/15 group-hover:text-white/40 transition-colors" />
                     </Link>
                   ))}
                 </div>
@@ -325,24 +325,24 @@ export function DynamicIsland() {
             )}
 
             {/* Footer */}
-            <div className="flex items-center justify-between border-t border-neutral-800/50 px-4 py-2">
-              <div className="flex items-center gap-3 text-[10px] text-neutral-600">
+            <div className="flex items-center justify-between border-t border-white/[0.06] px-4 py-2">
+              <div className="flex items-center gap-3 text-[10px] text-white/25">
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded bg-neutral-800 px-1 py-0.5 text-[9px] font-mono">↑↓</kbd>
+                  <kbd className="rounded bg-white/[0.08] px-1 py-0.5 text-[9px] font-mono">↑↓</kbd>
                   gezin
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded bg-neutral-800 px-1 py-0.5 text-[9px] font-mono">↵</kbd>
+                  <kbd className="rounded bg-white/[0.08] px-1 py-0.5 text-[9px] font-mono">↵</kbd>
                   seç
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded bg-neutral-800 px-1 py-0.5 text-[9px] font-mono">esc</kbd>
+                  <kbd className="rounded bg-white/[0.08] px-1 py-0.5 text-[9px] font-mono">esc</kbd>
                   kapat
                 </span>
               </div>
               <div className="flex items-center gap-1.5">
                 <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="text-[10px] text-neutral-600">AI Ready</span>
+                <span className="text-[10px] text-white/25">AI Ready</span>
               </div>
             </div>
           </div>

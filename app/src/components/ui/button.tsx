@@ -6,22 +6,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-indigo-400 disabled:pointer-events-none disabled:opacity-50 cursor-pointer",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 disabled:pointer-events-none disabled:opacity-40 cursor-pointer active:scale-[0.97]",
   {
     variants: {
       variant: {
-        default: "bg-indigo-600 text-white shadow hover:bg-indigo-700",
-        destructive: "bg-red-600 text-white shadow-sm hover:bg-red-700",
-        outline: "border border-neutral-700 bg-transparent text-neutral-200 shadow-sm hover:bg-neutral-800",
-        secondary: "bg-neutral-800 text-neutral-200 shadow-sm hover:bg-neutral-700",
-        ghost: "text-neutral-300 hover:bg-neutral-800 hover:text-neutral-100",
-        link: "text-indigo-400 underline-offset-4 hover:underline",
+        default:
+          "bg-indigo-500/20 text-indigo-300 border border-indigo-400/20 backdrop-blur-sm shadow-lg shadow-indigo-500/10 hover:bg-indigo-500/30 hover:border-indigo-400/30 hover:shadow-indigo-500/20",
+        destructive:
+          "bg-red-500/15 text-red-300 border border-red-400/20 backdrop-blur-sm hover:bg-red-500/25 hover:border-red-400/30",
+        outline:
+          "bg-white/[0.03] text-white/70 border border-white/10 backdrop-blur-sm hover:bg-white/[0.06] hover:border-white/15 hover:text-white/90",
+        secondary:
+          "bg-white/[0.05] text-white/70 border border-white/8 backdrop-blur-sm hover:bg-white/[0.08] hover:text-white/90",
+        ghost:
+          "text-white/50 hover:bg-white/[0.05] hover:text-white/80",
+        link:
+          "text-indigo-400 underline-offset-4 hover:underline hover:text-indigo-300",
       },
       size: {
         default: "h-9 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        sm: "h-8 rounded-lg px-3 text-xs",
+        lg: "h-11 rounded-xl px-6",
+        icon: "h-9 w-9 rounded-lg",
       },
     },
     defaultVariants: {

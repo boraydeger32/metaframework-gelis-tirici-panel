@@ -60,7 +60,7 @@ export default function EmailTemplatesPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Email Templates</h1>
-          <p className="text-sm text-neutral-400">Bildirim ve transactional e-posta şablonları</p>
+          <p className="text-sm text-white/50">Bildirim ve transactional e-posta şablonları</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" className="flex-1 sm:flex-none"><Wand2 className="mr-2 h-3 w-3" />AI Oluştur</Button>
@@ -79,13 +79,13 @@ export default function EmailTemplatesPage() {
                 onClick={() => setActive(t)}
                 className={cn(
                   "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left transition-colors",
-                  active.id === t.id ? "bg-indigo-600/10 text-indigo-400" : "text-neutral-300 hover:bg-neutral-800"
+                  active.id === t.id ? "bg-indigo-600/10 text-indigo-400" : "text-white/60 hover:bg-white/[0.08]"
                 )}
               >
                 <Mail className="h-3.5 w-3.5 shrink-0" />
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-medium truncate">{t.name}</p>
-                  <p className="text-[10px] text-neutral-500">{t.event}</p>
+                  <p className="text-[10px] text-white/40">{t.event}</p>
                 </div>
                 <Badge variant={t.status === "active" ? "success" : "secondary"} className="text-[8px] shrink-0">{t.status}</Badge>
               </button>
@@ -102,15 +102,15 @@ export default function EmailTemplatesPage() {
                   <CardTitle>{active.name}</CardTitle>
                   <div className="mt-1 flex items-center gap-2">
                     <Badge variant="outline" className="text-[10px] font-mono">{active.event}</Badge>
-                    <span className="text-[10px] text-neutral-500">Son düzenleme: {active.lastEdited}</span>
+                    <span className="text-[10px] text-white/40">Son düzenleme: {active.lastEdited}</span>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <div className="flex rounded-lg border border-neutral-800 p-0.5">
-                    <button onClick={() => setViewMode("preview")} className={cn("flex items-center gap-1 rounded-md px-2.5 py-1 text-[10px] font-medium", viewMode === "preview" ? "bg-neutral-800 text-white" : "text-neutral-500")}>
+                  <div className="flex rounded-lg border border-white/[0.08] p-0.5">
+                    <button onClick={() => setViewMode("preview")} className={cn("flex items-center gap-1 rounded-md px-2.5 py-1 text-[10px] font-medium", viewMode === "preview" ? "bg-white/[0.08] text-white" : "text-white/40")}>
                       <Eye className="h-3 w-3" /> Preview
                     </button>
-                    <button onClick={() => setViewMode("code")} className={cn("flex items-center gap-1 rounded-md px-2.5 py-1 text-[10px] font-medium", viewMode === "code" ? "bg-neutral-800 text-white" : "text-neutral-500")}>
+                    <button onClick={() => setViewMode("code")} className={cn("flex items-center gap-1 rounded-md px-2.5 py-1 text-[10px] font-medium", viewMode === "code" ? "bg-white/[0.08] text-white" : "text-white/40")}>
                       <Code className="h-3 w-3" /> HTML
                     </button>
                   </div>
@@ -120,16 +120,16 @@ export default function EmailTemplatesPage() {
             </CardHeader>
             <CardContent>
               <div className="mb-3">
-                <label className="mb-1 block text-[10px] text-neutral-500">Subject</label>
+                <label className="mb-1 block text-[10px] text-white/40">Subject</label>
                 <Input defaultValue={active.subject} className="font-mono text-xs" />
               </div>
 
               {viewMode === "preview" ? (
-                <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-6 overflow-auto">
+                <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-6 overflow-auto">
                   <div dangerouslySetInnerHTML={{ __html: previewHtml }} />
                 </div>
               ) : (
-                <pre className="max-h-[400px] overflow-auto rounded-xl bg-neutral-950 border border-neutral-800 p-4 text-xs font-mono text-neutral-400">
+                <pre className="max-h-[400px] overflow-auto rounded-xl bg-white/[0.02] border border-white/[0.08] p-4 text-xs font-mono text-white/50">
                   {previewHtml}
                 </pre>
               )}
@@ -145,10 +145,10 @@ export default function EmailTemplatesPage() {
                   <button
                     key={v}
                     onClick={() => { navigator.clipboard.writeText(v); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
-                    className="flex items-center gap-1 rounded-md border border-neutral-800 bg-neutral-900 px-2.5 py-1 text-[10px] font-mono text-indigo-400 hover:border-indigo-800 transition-colors"
+                    className="flex items-center gap-1 rounded-md border border-white/[0.08] bg-white/[0.04] px-2.5 py-1 text-[10px] font-mono text-indigo-400 hover:border-indigo-800 transition-colors"
                   >
                     {v}
-                    <Copy className="h-2.5 w-2.5 text-neutral-600" />
+                    <Copy className="h-2.5 w-2.5 text-white/25" />
                   </button>
                 ))}
               </div>

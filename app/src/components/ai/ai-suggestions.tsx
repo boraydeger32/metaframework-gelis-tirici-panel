@@ -104,9 +104,9 @@ export function AISuggestions() {
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <p className="text-sm font-medium text-neutral-200">{currentSuggestion.title}</p>
+              <p className="text-sm font-medium text-white/80">{currentSuggestion.title}</p>
             </div>
-            <p className="mt-1 text-xs text-neutral-400 leading-relaxed">
+            <p className="mt-1 text-xs text-white/50 leading-relaxed">
               {currentSuggestion.description}
             </p>
             <Link
@@ -120,16 +120,16 @@ export function AISuggestions() {
           </div>
           <button
             onClick={handleDismiss}
-            className="flex h-5 w-5 items-center justify-center rounded text-neutral-600 hover:text-neutral-400 transition-colors"
+            className="flex h-5 w-5 items-center justify-center rounded text-white/25 hover:text-white/50 transition-colors"
           >
             <X className="h-3 w-3" />
           </button>
         </div>
 
         {/* AI attribution */}
-        <div className="mt-3 flex items-center gap-1.5 border-t border-neutral-800/30 pt-2">
+        <div className="mt-3 flex items-center gap-1.5 border-t border-white/[0.08]/30 pt-2">
           <Sparkles className="h-2.5 w-2.5 text-indigo-500" />
-          <span className="text-[9px] text-neutral-600">AI Proactive Suggestion</span>
+          <span className="text-[9px] text-white/25">AI Proactive Suggestion</span>
           <div className={cn("ml-auto h-1.5 w-1.5 rounded-full", config.dot)} />
         </div>
       </div>

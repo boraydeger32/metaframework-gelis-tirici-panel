@@ -15,47 +15,75 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-const stats = [
-  { label: "Models", value: "12", icon: Database, change: "+2 bu hafta" },
-  { label: "Modules", value: "8", icon: Puzzle, change: "3 aktif" },
-  { label: "API Endpoints", value: "47", icon: Server, change: "Auto-generated" },
-  { label: "Migrations", value: "23", icon: GitBranch, change: "Son: 2 saat önce" },
-];
+import { useSchemaStore } from "@/stores/schema-store";
+import { useModuleStore } from "@/stores/module-store";
+import { useActivityStore, type ActivityType } from "@/stores/activity-store";
 
 const quickActions = [
-  { label: "Yeni Model Oluştur", href: "/schema", icon: Database, color: "bg-indigo-600/10 text-indigo-400" },
-  { label: "Modül Ekle", href: "/modules", icon: Puzzle, color: "bg-emerald-600/10 text-emerald-400" },
-  { label: "Tema Düzenle", href: "/theme", icon: Palette, color: "bg-purple-600/10 text-purple-400" },
-  { label: "AI ile Oluştur", href: "/ai-copilot", icon: Terminal, color: "bg-amber-600/10 text-amber-400" },
+  { label: "Yeni Model Olustur", href: "/schema", icon: Database, color: "bg-indigo-600/10 text-indigo-400" },
+  { label: "Modul Ekle", href: "/modules", icon: Puzzle, color: "bg-emerald-600/10 text-emerald-400" },
+  { label: "Tema Duzenle", href: "/theme", icon: Palette, color: "bg-purple-600/10 text-purple-400" },
+  { label: "AI ile Olustur", href: "/ai-copilot", icon: Terminal, color: "bg-amber-600/10 text-amber-400" },
 ];
 
-const recentActivity = [
-  { action: "Model güncellendi", target: "Customer", time: "5 dk önce", type: "update" as const },
-  { action: "Modül etkinleştirildi", target: "E-Commerce", time: "1 saat önce", type: "success" as const },
-  { action: "Migration çalıştırıldı", target: "003_add_orders", time: "2 saat önce", type: "info" as const },
-  { action: "API endpoint oluşturuldu", target: "/api/products", time: "3 saat önce", type: "success" as const },
-  { action: "Tema renkleri değiştirildi", target: "Brand Primary", time: "5 saat önce", type: "update" as const },
-];
-
-const activityBadge: Record<string, "success" | "warning" | "default"> = {
-  update: "warning",
-  success: "success",
-  info: "default",
+const activityBadgeMap: Record<ActivityType, "success" | "warning" | "default"> = {
+  schema: "warning",
+  module: "success",
+  migration: "default",
+  api: "success",
+  theme: "warning",
+  auth: "default",
+  form: "default",
+  data: "default",
+  workflow: "default",
+  permission: "default",
 };
 
+function formatRelativeTime(timestamp: string): string {
+  const now = Date.now();
+  const then = new Date(timestamp).getTime();
+  const diffMs = now - then;
+  const diffMin = Math.floor(diffMs / 60000);
+
+  if (diffMin < 1) return "az once";
+  if (diffMin < 60) return `${diffMin} dk once`;
+  const diffHours = Math.floor(diffMin / 60);
+  if (diffHours < 24) return `${diffHours} saat once`;
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays < 7) return `${diffDays} gun once`;
+  const diffWeeks = Math.floor(diffDays / 7);
+  return `${diffWeeks} hafta once`;
+}
+
 export default function DashboardPage() {
+  const models = useSchemaStore((s) => s.models);
+  const modules = useModuleStore((s) => s.modules);
+  const activities = useActivityStore((s) => s.activities);
+
+  const modelCount = models.length;
+  const totalModules = modules.length;
+  const enabledModules = modules.filter((m) => m.enabled).length;
+  const apiEndpoints = modelCount * 5;
+  const recentActivities = activities.slice(0, 5);
+
+  const stats = [
+    { label: "Models", value: String(modelCount), icon: Database, change: `${models.length} tanimli` },
+    { label: "Modules", value: String(totalModules), icon: Puzzle, change: `${enabledModules} aktif` },
+    { label: "API Endpoints", value: String(apiEndpoints), icon: Server, change: "Auto-generated" },
+    { label: "Aktiviteler", value: String(activities.length), icon: GitBranch, change: recentActivities.length > 0 ? `Son: ${formatRelativeTime(recentActivities[0].timestamp)}` : "Henuz yok" },
+  ];
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-neutral-100">Dashboard</h1>
-          <p className="text-sm text-neutral-400">Proje durumu ve hızlı işlemler</p>
+          <h1 className="text-2xl font-bold text-white/90">Dashboard</h1>
+          <p className="text-sm text-white/50">Proje durumu ve hizli islemler</p>
         </div>
         <Button asChild className="w-full sm:w-auto">
           <Link href="/ai-copilot">
             <Zap className="mr-2 h-4 w-4" />
-            AI ile Başla
+            AI ile Basla
           </Link>
         </Button>
       </div>
@@ -67,9 +95,9 @@ export default function DashboardPage() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-neutral-400">{stat.label}</p>
+                  <p className="text-sm text-white/50">{stat.label}</p>
                   <p className="mt-1 text-2xl font-bold">{stat.value}</p>
-                  <p className="mt-1 text-xs text-neutral-500">{stat.change}</p>
+                  <p className="mt-1 text-xs text-white/40">{stat.change}</p>
                 </div>
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600/10">
                   <stat.icon className="h-5 w-5 text-indigo-400" />
@@ -84,21 +112,21 @@ export default function DashboardPage() {
         {/* Quick Actions */}
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle className="text-base">Hızlı İşlemler</CardTitle>
-            <CardDescription>Sık kullanılan işlemler</CardDescription>
+            <CardTitle className="text-base">Hizli Islemler</CardTitle>
+            <CardDescription>Sik kullanilan islemler</CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
             {quickActions.map((action) => (
               <Link
                 key={action.href}
                 href={action.href}
-                className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-neutral-800"
+                className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-white/[0.08]"
               >
                 <div className={`flex h-9 w-9 items-center justify-center rounded-lg ${action.color}`}>
                   <action.icon className="h-4 w-4" />
                 </div>
-                <span className="flex-1 text-sm font-medium text-neutral-200">{action.label}</span>
-                <ArrowRight className="h-4 w-4 text-neutral-600" />
+                <span className="flex-1 text-sm font-medium text-white/80">{action.label}</span>
+                <ArrowRight className="h-4 w-4 text-white/25" />
               </Link>
             ))}
           </CardContent>
@@ -110,32 +138,35 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle className="text-base">Son Aktiviteler</CardTitle>
-                <CardDescription>Sistemdeki son değişiklikler</CardDescription>
+                <CardDescription>Sistemdeki son degisiklikler</CardDescription>
               </div>
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/activity">
                   <Activity className="mr-2 h-3 w-3" />
-                  Tümü
+                  Tumu
                 </Link>
               </Button>
             </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {recentActivity.map((item, i) => (
+              {recentActivities.length === 0 && (
+                <p className="text-sm text-white/40">Henuz aktivite yok.</p>
+              )}
+              {recentActivities.map((item) => (
                 <div
-                  key={i}
-                  className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 sm:flex-row sm:items-center sm:justify-between"
+                  key={item.id}
+                  className="flex flex-col gap-2 rounded-lg border border-white/[0.08] p-3 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant={activityBadge[item.type]}>
+                    <Badge variant={activityBadgeMap[item.type]}>
                       {item.action}
                     </Badge>
-                    <span className="text-sm font-medium text-neutral-200">
+                    <span className="text-sm font-medium text-white/80">
                       {item.target}
                     </span>
                   </div>
-                  <span className="text-xs text-neutral-500">{item.time}</span>
+                  <span className="text-xs text-white/40">{formatRelativeTime(item.timestamp)}</span>
                 </div>
               ))}
             </div>

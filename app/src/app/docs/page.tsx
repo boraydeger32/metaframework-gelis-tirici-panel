@@ -118,7 +118,7 @@ export default function DocsPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Documentation</h1>
-          <p className="text-sm text-neutral-400">Otomatik üretilmiş API ve model dokümantasyonu</p>
+          <p className="text-sm text-white/50">Otomatik üretilmiş API ve model dokümantasyonu</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm">
@@ -133,14 +133,14 @@ export default function DocsPage() {
         <Card className="lg:col-span-1">
           <CardContent className="p-3">
             <div className="relative mb-3">
-              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-neutral-500" />
+              <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-white/40" />
               <Input placeholder="Dokümantasyon ara..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-8 text-xs h-8" />
             </div>
             {sections.map((section) => (
               <div key={section.id} className="mb-3">
                 <button
                   onClick={() => setActiveSection(section.id)}
-                  className="flex w-full items-center gap-2 px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-neutral-500"
+                  className="flex w-full items-center gap-2 px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-white/40"
                 >
                   <section.icon className={cn("h-3.5 w-3.5", section.color)} />
                   {section.title}
@@ -157,7 +157,7 @@ export default function DocsPage() {
                         "flex w-full items-center gap-1.5 rounded-md px-3 py-1.5 text-[11px] transition-colors",
                         activePage === page.title && activeSection === section.id
                           ? "bg-indigo-600/10 text-indigo-400"
-                          : "text-neutral-400 hover:bg-neutral-800 hover:text-neutral-200"
+                          : "text-white/50 hover:bg-white/[0.08] hover:text-white/80"
                       )}
                     >
                       <FileText className="h-3 w-3 shrink-0" />
@@ -176,7 +176,7 @@ export default function DocsPage() {
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-2">
                 <Badge variant="outline" className="text-[10px]">{activeSection}</Badge>
-                <ChevronRight className="h-3 w-3 text-neutral-600" />
+                <ChevronRight className="h-3 w-3 text-white/25" />
                 <CardTitle>{activePage}</CardTitle>
               </div>
               <div className="flex gap-2">
@@ -191,9 +191,9 @@ export default function DocsPage() {
           <CardContent>
             <div className="prose prose-invert prose-sm max-w-none">
               {generatedDoc.split("\n").map((line, i) => {
-                if (line.startsWith("# ")) return <h1 key={i} className="text-xl font-bold text-neutral-100 mt-0 mb-4">{line.slice(2)}</h1>;
-                if (line.startsWith("## ")) return <h2 key={i} className="text-base font-semibold text-neutral-200 mt-6 mb-2 border-b border-neutral-800 pb-2">{line.slice(3)}</h2>;
-                if (line.startsWith("### ")) return <h3 key={i} className="text-sm font-semibold text-neutral-300 mt-4 mb-1">{line.slice(4)}</h3>;
+                if (line.startsWith("# ")) return <h1 key={i} className="text-xl font-bold text-white/90 mt-0 mb-4">{line.slice(2)}</h1>;
+                if (line.startsWith("## ")) return <h2 key={i} className="text-base font-semibold text-white/80 mt-6 mb-2 border-b border-white/[0.08] pb-2">{line.slice(3)}</h2>;
+                if (line.startsWith("### ")) return <h3 key={i} className="text-sm font-semibold text-white/60 mt-4 mb-1">{line.slice(4)}</h3>;
                 if (line.startsWith("```")) {
                   return null;
                 }
@@ -201,9 +201,9 @@ export default function DocsPage() {
                   const cells = line.split("|").filter(Boolean).map((c) => c.trim());
                   if (cells.every((c) => c.match(/^[-:]+$/))) return null;
                   return (
-                    <div key={i} className="flex text-[10px] sm:text-[11px] font-mono border-b border-neutral-800/50 overflow-x-auto">
+                    <div key={i} className="flex text-[10px] sm:text-[11px] font-mono border-b border-white/[0.06] overflow-x-auto">
                       {cells.map((cell, j) => (
-                        <span key={j} className={cn("flex-1 px-1.5 sm:px-2 py-1 whitespace-nowrap", j === 0 ? "text-neutral-200 font-medium" : "text-neutral-400")}>
+                        <span key={j} className={cn("flex-1 px-1.5 sm:px-2 py-1 whitespace-nowrap", j === 0 ? "text-white/80 font-medium" : "text-white/50")}>
                           {cell}
                         </span>
                       ))}
@@ -212,13 +212,13 @@ export default function DocsPage() {
                 }
                 if (line.startsWith("- **")) {
                   const match = line.match(/- \*\*(.*?)\*\*: (.*)/);
-                  if (match) return <p key={i} className="text-xs text-neutral-400 ml-2"><strong className="text-neutral-200">{match[1]}</strong>: {match[2]}</p>;
+                  if (match) return <p key={i} className="text-xs text-white/50 ml-2"><strong className="text-white/80">{match[1]}</strong>: {match[2]}</p>;
                 }
                 if (line.startsWith("- `")) {
-                  return <p key={i} className="text-xs text-neutral-400 ml-2">{line.slice(2)}</p>;
+                  return <p key={i} className="text-xs text-white/50 ml-2">{line.slice(2)}</p>;
                 }
                 if (line.trim() === "") return <div key={i} className="h-2" />;
-                return <p key={i} className="text-xs text-neutral-400 leading-relaxed">{line}</p>;
+                return <p key={i} className="text-xs text-white/50 leading-relaxed">{line}</p>;
               })}
             </div>
           </CardContent>

@@ -66,7 +66,7 @@ export default function HealthPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">System Health</h1>
-          <p className="text-sm text-neutral-400">Sistem durumu ve performans metrikleri</p>
+          <p className="text-sm text-white/50">Sistem durumu ve performans metrikleri</p>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2 rounded-lg border border-emerald-800/30 bg-emerald-950/20 px-3 py-1.5">
@@ -86,22 +86,22 @@ export default function HealthPage() {
                 <Zap className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
-                <p className="text-sm font-medium text-neutral-200">Uptime</p>
-                <p className="text-xs text-neutral-500 font-mono">{formatUptime(uptimeSeconds)}</p>
+                <p className="text-sm font-medium text-white/80">Uptime</p>
+                <p className="text-xs text-white/40 font-mono">{formatUptime(uptimeSeconds)}</p>
               </div>
             </div>
             <div className="flex items-center gap-4 sm:gap-6">
               <div className="text-left sm:text-right">
-                <p className="text-xs text-neutral-500">Availability (30d)</p>
+                <p className="text-xs text-white/40">Availability (30d)</p>
                 <p className="text-lg font-bold text-emerald-400">99.97%</p>
               </div>
               <div className="text-left sm:text-right">
-                <p className="text-xs text-neutral-500">Avg Response</p>
-                <p className="text-lg font-bold text-neutral-200">45ms</p>
+                <p className="text-xs text-white/40">Avg Response</p>
+                <p className="text-lg font-bold text-white/80">45ms</p>
               </div>
               <div className="text-left sm:text-right">
-                <p className="text-xs text-neutral-500">Requests (24h)</p>
-                <p className="text-lg font-bold text-neutral-200">12.4K</p>
+                <p className="text-xs text-white/40">Requests (24h)</p>
+                <p className="text-lg font-bold text-white/80">12.4K</p>
               </div>
             </div>
           </div>
@@ -121,9 +121,9 @@ export default function HealthPage() {
                     {m.status}
                   </Badge>
                 </div>
-                <p className="mt-3 text-2xl font-bold">{m.value}<span className="text-sm text-neutral-500 ml-0.5">{m.unit}</span></p>
-                <p className="text-[10px] text-neutral-500">{m.label}</p>
-                <div className="mt-2 h-1.5 rounded-full bg-neutral-800 overflow-hidden">
+                <p className="mt-3 text-2xl font-bold">{m.value}<span className="text-sm text-white/40 ml-0.5">{m.unit}</span></p>
+                <p className="text-[10px] text-white/40">{m.label}</p>
+                <div className="mt-2 h-1.5 rounded-full bg-white/[0.08] overflow-hidden">
                   <div
                     className={cn("h-full rounded-full transition-all", percent > 80 ? "bg-red-500" : percent > 60 ? "bg-amber-500" : "bg-emerald-500")}
                     style={{ width: `${percent}%` }}
@@ -155,7 +155,7 @@ export default function HealthPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-2 flex justify-between text-[9px] text-neutral-600">
+            <div className="mt-2 flex justify-between text-[9px] text-white/25">
               <span>20 req önce</span>
               <span>şimdi</span>
             </div>
@@ -173,9 +173,9 @@ export default function HealthPage() {
           <CardContent>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               {dbStats.map((s) => (
-                <div key={s.label} className="rounded-lg bg-neutral-800/30 p-2.5">
-                  <p className="text-[10px] text-neutral-500">{s.label}</p>
-                  <p className="mt-0.5 text-sm font-semibold text-neutral-200">{s.value}</p>
+                <div key={s.label} className="rounded-lg bg-white/[0.04] p-2.5">
+                  <p className="text-[10px] text-white/40">{s.label}</p>
+                  <p className="mt-0.5 text-sm font-semibold text-white/80">{s.value}</p>
                 </div>
               ))}
             </div>
@@ -194,17 +194,17 @@ export default function HealthPage() {
         <CardContent>
           <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
             {services.map((svc) => (
-              <div key={svc.name} className="flex items-center gap-3 rounded-lg border border-neutral-800 p-3">
+              <div key={svc.name} className="flex items-center gap-3 rounded-lg border border-white/[0.08] p-3">
                 <div className={cn("h-2.5 w-2.5 rounded-full", svc.status === "running" ? "bg-emerald-500" : "bg-red-500")} />
                 <div className="flex-1">
-                  <p className="text-xs font-medium text-neutral-200">{svc.name}</p>
-                  <p className="text-[10px] text-neutral-500">
+                  <p className="text-xs font-medium text-white/80">{svc.name}</p>
+                  <p className="text-[10px] text-white/40">
                     {svc.port && `Port ${svc.port} · `}{svc.uptime}
                   </p>
                 </div>
                 <div className="text-right">
                   <Badge variant={svc.status === "running" ? "success" : "destructive"} className="text-[9px]">{svc.status}</Badge>
-                  {svc.response !== "—" && <p className="mt-0.5 text-[9px] text-neutral-600">{svc.response}</p>}
+                  {svc.response !== "—" && <p className="mt-0.5 text-[9px] text-white/25">{svc.response}</p>}
                 </div>
               </div>
             ))}

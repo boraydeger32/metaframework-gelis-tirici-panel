@@ -150,21 +150,21 @@ export default function TerminalPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Terminal</h1>
-          <p className="text-sm text-neutral-400">Sistem komutları ve MetaPanel CLI</p>
+          <p className="text-sm text-white/50">Sistem komutları ve MetaPanel CLI</p>
         </div>
       </div>
 
-      <div className="rounded-xl border border-neutral-800 bg-neutral-950 overflow-hidden shadow-2xl">
+      <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] overflow-hidden shadow-2xl">
         {/* Tab Bar */}
-        <div className="flex items-center gap-0.5 border-b border-neutral-800 bg-neutral-900 px-2 py-1.5 overflow-x-auto">
+        <div className="flex items-center gap-0.5 border-b border-white/[0.08] bg-white/[0.04] px-2 py-1.5 overflow-x-auto">
           {tabs.map((tab) => (
-            <div key={tab.id} className={cn("flex items-center gap-1.5 rounded-md px-3 py-1", tab.active ? "bg-neutral-800 text-neutral-200" : "text-neutral-500 hover:text-neutral-400")}>
+            <div key={tab.id} className={cn("flex items-center gap-1.5 rounded-md px-3 py-1", tab.active ? "bg-white/[0.08] text-white/80" : "text-white/40 hover:text-white/50")}>
               <TerminalIcon className="h-3 w-3" />
               <span className="text-[10px] font-medium">{tab.name}</span>
-              <button className="ml-1 rounded hover:bg-neutral-700 p-0.5"><X className="h-2.5 w-2.5" /></button>
+              <button className="ml-1 rounded hover:bg-white/[0.12] p-0.5"><X className="h-2.5 w-2.5" /></button>
             </div>
           ))}
-          <button className="rounded-md p-1 text-neutral-600 hover:text-neutral-400 hover:bg-neutral-800">
+          <button className="rounded-md p-1 text-white/25 hover:text-white/50 hover:bg-white/[0.08]">
             <Plus className="h-3.5 w-3.5" />
           </button>
           <div className="ml-auto flex items-center gap-1">
@@ -184,12 +184,12 @@ export default function TerminalPage() {
               {line.type === "input" && (
                 <span>
                   <span className="text-emerald-400">~/metapanel</span>
-                  <span className="text-neutral-600"> $ </span>
-                  <span className="text-neutral-200">{line.content}</span>
+                  <span className="text-white/25"> $ </span>
+                  <span className="text-white/80">{line.content}</span>
                 </span>
               )}
               {line.type === "output" && (
-                <span className="text-neutral-400">{line.content}</span>
+                <span className="text-white/50">{line.content}</span>
               )}
               {line.type === "error" && (
                 <span className="text-red-400">{line.content}</span>
@@ -203,13 +203,13 @@ export default function TerminalPage() {
           {/* Input Line */}
           <div className="flex items-center leading-6">
             <span className="text-emerald-400">~/metapanel</span>
-            <span className="text-neutral-600"> $ </span>
+            <span className="text-white/25"> $ </span>
             <input
               ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent text-neutral-200 focus:outline-none caret-indigo-400"
+              className="flex-1 bg-transparent text-white/80 focus:outline-none caret-indigo-400"
               autoFocus
               spellCheck={false}
             />

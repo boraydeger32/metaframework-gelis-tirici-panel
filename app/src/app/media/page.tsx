@@ -99,7 +99,7 @@ export default function MediaPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Media Manager</h1>
-          <p className="text-sm text-neutral-400">Dosya ve medya yönetimi</p>
+          <p className="text-sm text-white/50">Dosya ve medya yönetimi</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm">
@@ -123,23 +123,23 @@ export default function MediaPage() {
                 onClick={() => setActiveFolder(folder.name)}
                 className={cn(
                   "flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors",
-                  activeFolder === folder.name ? "bg-indigo-600/10 text-indigo-400" : "text-neutral-400 hover:bg-neutral-800"
+                  activeFolder === folder.name ? "bg-indigo-600/10 text-indigo-400" : "text-white/50 hover:bg-white/[0.08]"
                 )}
               >
                 <folder.icon className="h-4 w-4" />
                 <span className="flex-1 text-left">{folder.name}</span>
-                <span className="text-[10px] text-neutral-600">{folder.count}</span>
+                <span className="text-[10px] text-white/25">{folder.count}</span>
               </button>
             ))}
-            <div className="mt-4 border-t border-neutral-800 pt-3">
-              <div className="flex items-center gap-2 px-3 text-xs text-neutral-500">
+            <div className="mt-4 border-t border-white/[0.08] pt-3">
+              <div className="flex items-center gap-2 px-3 text-xs text-white/40">
                 <HardDrive className="h-3 w-3" />
                 <span>{totalSize} kullanılıyor</span>
               </div>
-              <div className="mx-3 mt-2 h-1.5 rounded-full bg-neutral-800 overflow-hidden">
+              <div className="mx-3 mt-2 h-1.5 rounded-full bg-white/[0.08] overflow-hidden">
                 <div className="h-full w-[35%] rounded-full bg-indigo-600" />
               </div>
-              <p className="mt-1 px-3 text-[10px] text-neutral-600">500 MB&apos;den 186.4 MB</p>
+              <p className="mt-1 px-3 text-[10px] text-white/25">500 MB&apos;den 186.4 MB</p>
             </div>
           </CardContent>
         </Card>
@@ -149,7 +149,7 @@ export default function MediaPage() {
           {/* Toolbar */}
           <div className="flex items-center gap-3">
             <div className="relative flex-1 max-w-sm">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/40" />
               <Input placeholder="Dosya ara..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
             </div>
             {selectedFiles.size > 0 && (
@@ -159,11 +159,11 @@ export default function MediaPage() {
                 <Button variant="outline" size="sm" className="text-xs h-7 text-red-400"><Trash2 className="mr-1 h-3 w-3" />Sil</Button>
               </div>
             )}
-            <div className="ml-auto flex rounded-lg border border-neutral-800 p-0.5">
-              <button onClick={() => setViewMode("grid")} className={cn("rounded-md p-1.5", viewMode === "grid" ? "bg-neutral-800 text-white" : "text-neutral-500")}>
+            <div className="ml-auto flex rounded-lg border border-white/[0.08] p-0.5">
+              <button onClick={() => setViewMode("grid")} className={cn("rounded-md p-1.5", viewMode === "grid" ? "bg-white/[0.08] text-white" : "text-white/40")}>
                 <Grid3X3 className="h-3.5 w-3.5" />
               </button>
-              <button onClick={() => setViewMode("list")} className={cn("rounded-md p-1.5", viewMode === "list" ? "bg-neutral-800 text-white" : "text-neutral-500")}>
+              <button onClick={() => setViewMode("list")} className={cn("rounded-md p-1.5", viewMode === "list" ? "bg-white/[0.08] text-white" : "text-white/40")}>
                 <List className="h-3.5 w-3.5" />
               </button>
             </div>
@@ -176,12 +176,12 @@ export default function MediaPage() {
             onDrop={(e) => { e.preventDefault(); setDragOver(false); }}
             className={cn(
               "rounded-xl border-2 border-dashed p-8 text-center transition-all",
-              dragOver ? "border-indigo-500 bg-indigo-950/20" : "border-neutral-800 hover:border-neutral-700"
+              dragOver ? "border-indigo-500 bg-indigo-950/20" : "border-white/[0.08] hover:border-white/[0.12]"
             )}
           >
-            <Upload className="mx-auto h-8 w-8 text-neutral-600" />
-            <p className="mt-2 text-sm text-neutral-400">Dosyaları sürükleyip bırakın</p>
-            <p className="text-[10px] text-neutral-600">veya yükle butonunu kullanın</p>
+            <Upload className="mx-auto h-8 w-8 text-white/25" />
+            <p className="mt-2 text-sm text-white/50">Dosyaları sürükleyip bırakın</p>
+            <p className="text-[10px] text-white/25">veya yükle butonunu kullanın</p>
           </div>
 
           {/* Grid View */}
@@ -196,17 +196,17 @@ export default function MediaPage() {
                     onClick={() => toggleFile(file.id)}
                     className={cn(
                       "group rounded-xl border p-3 text-left transition-all",
-                      isSelected ? "border-indigo-600 bg-indigo-950/20 ring-1 ring-indigo-600/30" : "border-neutral-800 bg-neutral-900 hover:border-neutral-700"
+                      isSelected ? "border-indigo-600 bg-indigo-950/20 ring-1 ring-indigo-600/30" : "border-white/[0.08] bg-white/[0.04] hover:border-white/[0.12]"
                     )}
                   >
                     <div className={cn("flex h-24 items-center justify-center rounded-lg", file.color + "/10")}>
                       <Icon className={cn("h-8 w-8", file.color.replace("bg-", "text-").replace("-600", "-400"))} />
                     </div>
                     <div className="mt-2">
-                      <p className="text-xs font-medium text-neutral-200 truncate">{file.name}</p>
+                      <p className="text-xs font-medium text-white/80 truncate">{file.name}</p>
                       <div className="mt-1 flex items-center justify-between">
-                        <span className="text-[10px] text-neutral-500">{file.size}</span>
-                        {file.dimensions && <span className="text-[10px] text-neutral-600">{file.dimensions}</span>}
+                        <span className="text-[10px] text-white/40">{file.size}</span>
+                        {file.dimensions && <span className="text-[10px] text-white/25">{file.dimensions}</span>}
                       </div>
                     </div>
                   </button>
@@ -219,25 +219,25 @@ export default function MediaPage() {
           {viewMode === "list" && (
             <Card>
               <CardContent className="p-0">
-                <div className="divide-y divide-neutral-800/50">
+                <div className="divide-y divide-white/[0.06]">
                   {filtered.map((file) => {
                     const Icon = typeIcons[file.type] || File;
                     return (
-                      <div key={file.id} className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-800/20 transition-colors">
-                        <input type="checkbox" checked={selectedFiles.has(file.id)} onChange={() => toggleFile(file.id)} className="rounded border-neutral-700" />
+                      <div key={file.id} className="flex items-center gap-3 px-4 py-3 hover:bg-white/[0.03] transition-colors">
+                        <input type="checkbox" checked={selectedFiles.has(file.id)} onChange={() => toggleFile(file.id)} className="rounded border-white/[0.12]" />
                         <div className={cn("flex h-8 w-8 items-center justify-center rounded-lg", file.color + "/10")}>
                           <Icon className={cn("h-4 w-4", file.color.replace("bg-", "text-").replace("-600", "-400"))} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-neutral-200 truncate">{file.name}</p>
+                          <p className="text-sm text-white/80 truncate">{file.name}</p>
                         </div>
-                        <span className="text-xs text-neutral-500">{file.size}</span>
-                        {file.dimensions && <span className="text-xs text-neutral-600">{file.dimensions}</span>}
-                        <span className="text-xs text-neutral-600">{file.uploadedAt}</span>
+                        <span className="text-xs text-white/40">{file.size}</span>
+                        {file.dimensions && <span className="text-xs text-white/25">{file.dimensions}</span>}
+                        <span className="text-xs text-white/25">{file.uploadedAt}</span>
                         <div className="flex gap-1 opacity-0 group-hover:opacity-100">
-                          <button className="rounded p-1 hover:bg-neutral-700"><Eye className="h-3 w-3 text-neutral-400" /></button>
-                          <button className="rounded p-1 hover:bg-neutral-700"><Copy className="h-3 w-3 text-neutral-400" /></button>
-                          <button className="rounded p-1 hover:bg-neutral-700"><Trash2 className="h-3 w-3 text-red-400" /></button>
+                          <button className="rounded p-1 hover:bg-white/[0.12]"><Eye className="h-3 w-3 text-white/50" /></button>
+                          <button className="rounded p-1 hover:bg-white/[0.12]"><Copy className="h-3 w-3 text-white/50" /></button>
+                          <button className="rounded p-1 hover:bg-white/[0.12]"><Trash2 className="h-3 w-3 text-red-400" /></button>
                         </div>
                       </div>
                     );

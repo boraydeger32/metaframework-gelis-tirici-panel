@@ -26,7 +26,7 @@ export default function WebhooksPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Webhooks</h1>
-          <p className="text-sm text-neutral-400">Event hook&apos;ları ve webhook endpoint&apos;lerini yönetin</p>
+          <p className="text-sm text-white/50">Event hook&apos;ları ve webhook endpoint&apos;lerini yönetin</p>
         </div>
         <Button size="sm" className="w-full sm:w-auto">
           <Plus className="mr-2 h-3 w-3" />
@@ -41,11 +41,11 @@ export default function WebhooksPage() {
             <CardContent className="p-5">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${wh.active ? "bg-emerald-600/10 text-emerald-400" : "bg-neutral-800 text-neutral-500"}`}>
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${wh.active ? "bg-emerald-600/10 text-emerald-400" : "bg-white/[0.08] text-white/40"}`}>
                     <Webhook className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-neutral-100">{wh.name}</h3>
+                    <h3 className="font-semibold text-white/90">{wh.name}</h3>
                     <Badge variant="outline" className="text-[10px] font-mono mt-1">{wh.event}</Badge>
                   </div>
                 </div>
@@ -53,8 +53,8 @@ export default function WebhooksPage() {
                   {wh.active ? "Active" : "Paused"}
                 </Badge>
               </div>
-              <code className="mt-3 block text-xs text-neutral-500 font-mono truncate">{wh.url}</code>
-              <div className="mt-3 flex items-center justify-between text-xs text-neutral-500">
+              <code className="mt-3 block text-xs text-white/40 font-mono truncate">{wh.url}</code>
+              <div className="mt-3 flex items-center justify-between text-xs text-white/40">
                 <span className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
                   {wh.lastTriggered}
@@ -90,7 +90,7 @@ export default function WebhooksPage() {
         <CardContent>
           <div className="space-y-2">
             {recentDeliveries.map((d, i) => (
-              <div key={i} className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+              <div key={i} className="flex flex-col gap-2 rounded-lg border border-white/[0.08] p-3 text-sm sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex flex-wrap items-center gap-2">
                   {d.status === "success" ? (
                     <CheckCircle className="h-4 w-4 text-emerald-400 shrink-0" />
@@ -102,7 +102,7 @@ export default function WebhooksPage() {
                     {d.statusCode}
                   </Badge>
                 </div>
-                <div className="flex items-center gap-4 text-xs text-neutral-500">
+                <div className="flex items-center gap-4 text-xs text-white/40">
                   <span>{d.duration}</span>
                   <span>{d.time}</span>
                 </div>

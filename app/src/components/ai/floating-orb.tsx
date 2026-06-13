@@ -143,18 +143,18 @@ export function FloatingOrb() {
           </div>
 
           {/* Tooltip */}
-          <div className="absolute bottom-full right-0 mb-2 rounded-lg bg-neutral-900 border border-neutral-800 px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-            <p className="text-xs text-neutral-300">AI Assistant</p>
-            <p className="text-[10px] text-neutral-500">{contextualHints[pathname]?.slice(0, 40)}...</p>
+          <div className="absolute bottom-full right-0 mb-2 rounded-lg bg-white/[0.04] border border-white/[0.08] px-3 py-1.5 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            <p className="text-xs text-white/60">AI Assistant</p>
+            <p className="text-[10px] text-white/40">{contextualHints[pathname]?.slice(0, 40)}...</p>
           </div>
         </button>
       )}
 
       {/* Chat Panel */}
       {open && !minimized && (
-        <div className="fixed bottom-0 right-0 z-50 w-full sm:bottom-6 sm:right-6 sm:w-[380px] animate-in sm:rounded-2xl border border-neutral-800 bg-neutral-950/95 shadow-2xl shadow-black/50 backdrop-blur-xl overflow-hidden flex flex-col" style={{ maxHeight: "min(560px, calc(100vh - 60px))" }}>
+        <div className="fixed bottom-0 right-0 z-50 w-full sm:bottom-6 sm:right-6 sm:w-[380px] animate-in sm:rounded-2xl border border-white/[0.08] bg-white/[0.02]/95 shadow-2xl shadow-black/50 backdrop-blur-xl overflow-hidden flex flex-col" style={{ maxHeight: "min(560px, calc(100vh - 60px))" }}>
           {/* Header */}
-          <div className="flex items-center gap-3 border-b border-neutral-800/50 px-4 py-3">
+          <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
             <div className="relative">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600">
                 <Sparkles className="h-4 w-4 text-white" />
@@ -162,25 +162,25 @@ export function FloatingOrb() {
               <div className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-neutral-950 bg-emerald-400" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-neutral-100">AI Assistant</p>
+              <p className="text-sm font-semibold text-white/90">AI Assistant</p>
               <p className="text-[10px] text-emerald-400">Online — context-aware</p>
             </div>
             <button
               onClick={() => setMinimized(true)}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 transition-colors"
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-white/40 hover:bg-white/[0.08] hover:text-white/60 transition-colors"
             >
               <Minimize2 className="h-3.5 w-3.5" />
             </button>
             <button
               onClick={() => { setOpen(false); setMessages([]); }}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-neutral-500 hover:bg-neutral-800 hover:text-neutral-300 transition-colors"
+              className="flex h-7 w-7 items-center justify-center rounded-lg text-white/40 hover:bg-white/[0.08] hover:text-white/60 transition-colors"
             >
               <X className="h-3.5 w-3.5" />
             </button>
           </div>
 
           {/* Context Banner */}
-          <div className="flex items-center gap-2 border-b border-neutral-800/30 bg-indigo-950/20 px-4 py-2">
+          <div className="flex items-center gap-2 border-b border-white/[0.08]/30 bg-indigo-950/20 px-4 py-2">
             <div className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
             <p className="text-[10px] text-indigo-300/80">
               {contextualHints[pathname] || "Size nasıl yardımcı olabilirim?"}
@@ -191,11 +191,11 @@ export function FloatingOrb() {
           <div ref={chatRef} className="flex-1 overflow-y-auto p-4 space-y-3">
             {messages.length === 0 && (
               <div className="text-center py-6">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-neutral-800/50">
+                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.06]">
                   <Sparkles className="h-5 w-5 text-indigo-400" />
                 </div>
-                <p className="text-sm text-neutral-400">Bir soru sorun veya komut verin</p>
-                <p className="mt-1 text-[10px] text-neutral-600">Sayfa bağlamını otomatik algılarım</p>
+                <p className="text-sm text-white/50">Bir soru sorun veya komut verin</p>
+                <p className="mt-1 text-[10px] text-white/25">Sayfa bağlamını otomatik algılarım</p>
               </div>
             )}
 
@@ -212,7 +212,7 @@ export function FloatingOrb() {
                     "max-w-[85%] rounded-xl px-3 py-2 text-sm",
                     msg.role === "user"
                       ? "bg-indigo-600 text-white"
-                      : "bg-neutral-800/80 text-neutral-200"
+                      : "bg-white/[0.08]/80 text-white/80"
                   )}
                 >
                   {msg.content.split("\n").map((line, i) => {
@@ -226,7 +226,7 @@ export function FloatingOrb() {
                     }
                     if (line.startsWith("`") && line.endsWith("`")) {
                       return (
-                        <code key={i} className="block rounded bg-neutral-900 px-2 py-0.5 text-xs font-mono text-indigo-300">
+                        <code key={i} className="block rounded bg-white/[0.04] px-2 py-0.5 text-xs font-mono text-indigo-300">
                           {line.slice(1, -1)}
                         </code>
                       );
@@ -246,15 +246,15 @@ export function FloatingOrb() {
 
                   {/* Code block detection */}
                   {msg.content.includes("```") && (
-                    <div className="mt-2 rounded-lg bg-neutral-900 border border-neutral-800 overflow-hidden">
-                      <div className="flex items-center justify-between px-2 py-1 bg-neutral-800/50">
-                        <span className="text-[9px] text-neutral-500 font-mono">code</span>
+                    <div className="mt-2 rounded-lg bg-white/[0.04] border border-white/[0.08] overflow-hidden">
+                      <div className="flex items-center justify-between px-2 py-1 bg-white/[0.06]">
+                        <span className="text-[9px] text-white/40 font-mono">code</span>
                         <button
                           onClick={() => handleCopy(
                             msg.content.split("```")[1]?.replace(/^sql\n|^typescript\n|^js\n/, "") || "",
                             msg.id
                           )}
-                          className="text-neutral-500 hover:text-neutral-300"
+                          className="text-white/40 hover:text-white/60"
                         >
                           {copied === msg.id ? (
                             <Check className="h-3 w-3" />
@@ -274,7 +274,7 @@ export function FloatingOrb() {
 
             {isThinking && (
               <div className="flex justify-start">
-                <div className="flex items-center gap-2 rounded-xl bg-neutral-800/80 px-3 py-2">
+                <div className="flex items-center gap-2 rounded-xl bg-white/[0.08]/80 px-3 py-2">
                   <div className="flex gap-1">
                     <div className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "0ms" }} />
                     <div className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: "150ms" }} />
@@ -287,12 +287,12 @@ export function FloatingOrb() {
 
           {/* Quick Replies */}
           {messages.length === 0 && currentQuickReplies && (
-            <div className="flex flex-wrap gap-1.5 border-t border-neutral-800/30 px-4 py-2">
+            <div className="flex flex-wrap gap-1.5 border-t border-white/[0.08]/30 px-4 py-2">
               {currentQuickReplies.map((reply) => (
                 <button
                   key={reply}
                   onClick={() => handleSend(reply)}
-                  className="rounded-full border border-neutral-800 bg-neutral-900 px-3 py-1 text-[10px] font-medium text-neutral-400 transition-colors hover:border-indigo-800 hover:text-indigo-400"
+                  className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-[10px] font-medium text-white/50 transition-colors hover:border-indigo-800 hover:text-indigo-400"
                 >
                   {reply}
                 </button>
@@ -301,14 +301,14 @@ export function FloatingOrb() {
           )}
 
           {/* Input */}
-          <div className="border-t border-neutral-800/50 px-4 py-3">
-            <div className="flex items-center gap-2 rounded-xl bg-neutral-800/50 px-3 py-2">
+          <div className="border-t border-white/[0.06] px-4 py-3">
+            <div className="flex items-center gap-2 rounded-xl bg-white/[0.06] px-3 py-2">
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
                 placeholder="AI'a sor..."
-                className="flex-1 bg-transparent text-xs text-neutral-200 placeholder:text-neutral-600 focus:outline-none"
+                className="flex-1 bg-transparent text-xs text-white/80 placeholder:text-white/25 focus:outline-none"
               />
               <button
                 onClick={() => handleSend()}
@@ -326,13 +326,13 @@ export function FloatingOrb() {
       {open && minimized && (
         <button
           onClick={() => setMinimized(false)}
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-950/95 pl-2 pr-4 py-2 shadow-xl backdrop-blur-xl transition-all hover:border-indigo-800 group"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.02]/95 pl-2 pr-4 py-2 shadow-xl backdrop-blur-xl transition-all hover:border-indigo-800 group"
         >
           <div className="relative flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600">
             <Sparkles className="h-3.5 w-3.5 text-white" />
             <div className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full border border-neutral-950 bg-emerald-400" />
           </div>
-          <span className="text-xs font-medium text-neutral-400 group-hover:text-neutral-200 transition-colors">
+          <span className="text-xs font-medium text-white/50 group-hover:text-white/80 transition-colors">
             AI Assistant
           </span>
           {messages.length > 0 && (

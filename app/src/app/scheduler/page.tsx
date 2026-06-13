@@ -59,7 +59,7 @@ export default function SchedulerPage() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold">Scheduled Jobs</h1>
-          <p className="text-sm text-neutral-400">{activeCount} / {jobList.length} job aktif</p>
+          <p className="text-sm text-white/50">{activeCount} / {jobList.length} job aktif</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm" className="flex-1 sm:flex-none"><Wand2 className="mr-2 h-3 w-3" />AI ile Oluştur</Button>
@@ -76,42 +76,42 @@ export default function SchedulerPage() {
               <CardContent className="p-5">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={cn("flex h-10 w-10 items-center justify-center rounded-lg", job.enabled ? "bg-indigo-600/10" : "bg-neutral-800")}>
-                      <Clock className={cn("h-5 w-5", job.enabled ? "text-indigo-400" : "text-neutral-500")} />
+                    <div className={cn("flex h-10 w-10 items-center justify-center rounded-lg", job.enabled ? "bg-indigo-600/10" : "bg-white/[0.08]")}>
+                      <Clock className={cn("h-5 w-5", job.enabled ? "text-indigo-400" : "text-white/40")} />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-neutral-100">{job.name}</h3>
-                      <code className="text-[10px] text-neutral-500 font-mono">{job.cron}</code>
+                      <h3 className="font-semibold text-white/90">{job.name}</h3>
+                      <code className="text-[10px] text-white/40 font-mono">{job.cron}</code>
                     </div>
                   </div>
-                  <button onClick={() => toggleJob(job.id)} className="rounded-lg p-1.5 hover:bg-neutral-800 transition-colors">
-                    {job.enabled ? <Pause className="h-4 w-4 text-neutral-400" /> : <Play className="h-4 w-4 text-neutral-500" />}
+                  <button onClick={() => toggleJob(job.id)} className="rounded-lg p-1.5 hover:bg-white/[0.08] transition-colors">
+                    {job.enabled ? <Pause className="h-4 w-4 text-white/50" /> : <Play className="h-4 w-4 text-white/40" />}
                   </button>
                 </div>
 
-                <p className="mt-2 text-xs text-neutral-400">{job.description}</p>
-                <code className="mt-1 block text-[10px] text-neutral-600 font-mono">{job.handler}</code>
+                <p className="mt-2 text-xs text-white/50">{job.description}</p>
+                <code className="mt-1 block text-[10px] text-white/25 font-mono">{job.handler}</code>
 
                 <div className="mt-3 flex items-center justify-between text-[10px]">
-                  <span className="text-neutral-500">{cronToHuman(job.cron)}</span>
+                  <span className="text-white/40">{cronToHuman(job.cron)}</span>
                   <Badge variant={status.badge} className="text-[9px] gap-1">
                     <StatusIcon className={cn("h-2.5 w-2.5", status.color)} />
                     {job.lastStatus}
                   </Badge>
                 </div>
 
-                <div className="mt-3 grid grid-cols-3 gap-2 border-t border-neutral-800 pt-3">
+                <div className="mt-3 grid grid-cols-3 gap-2 border-t border-white/[0.08] pt-3">
                   <div>
-                    <p className="text-[9px] text-neutral-600">Son çalışma</p>
-                    <p className="text-[10px] text-neutral-400">{job.lastRun}</p>
+                    <p className="text-[9px] text-white/25">Son çalışma</p>
+                    <p className="text-[10px] text-white/50">{job.lastRun}</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-neutral-600">Sonraki</p>
-                    <p className="text-[10px] text-neutral-400">{job.nextRun}</p>
+                    <p className="text-[9px] text-white/25">Sonraki</p>
+                    <p className="text-[10px] text-white/50">{job.nextRun}</p>
                   </div>
                   <div>
-                    <p className="text-[9px] text-neutral-600">Ort. süre</p>
-                    <p className="text-[10px] text-neutral-400">{job.avgDuration}</p>
+                    <p className="text-[9px] text-white/25">Ort. süre</p>
+                    <p className="text-[10px] text-white/50">{job.avgDuration}</p>
                   </div>
                 </div>
               </CardContent>

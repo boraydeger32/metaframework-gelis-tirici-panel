@@ -20,7 +20,7 @@ export default function SettingsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Settings</h1>
-        <p className="text-sm text-neutral-400">Proje ve ortam yapılandırması</p>
+        <p className="text-sm text-white/50">Proje ve ortam yapılandırması</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -34,15 +34,15 @@ export default function SettingsPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="mb-1.5 block text-sm text-neutral-400">Proje Adı</label>
+              <label className="mb-1.5 block text-sm text-white/50">Proje Adı</label>
               <Input defaultValue="MetaPanel Demo" />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm text-neutral-400">Base URL</label>
+              <label className="mb-1.5 block text-sm text-white/50">Base URL</label>
               <Input defaultValue="http://localhost:3000" />
             </div>
             <div>
-              <label className="mb-1.5 block text-sm text-neutral-400">Default Language</label>
+              <label className="mb-1.5 block text-sm text-white/50">Default Language</label>
               <Input defaultValue="tr" />
             </div>
             <Button size="sm">Kaydet</Button>
@@ -58,17 +58,17 @@ export default function SettingsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center justify-between rounded-lg border border-neutral-800 p-3">
+            <div className="flex items-center justify-between rounded-lg border border-white/[0.08] p-3">
               <div>
                 <p className="text-sm font-medium">PostgreSQL</p>
-                <p className="text-xs text-neutral-500">localhost:5432/metapanel</p>
+                <p className="text-xs text-white/40">localhost:5432/metapanel</p>
               </div>
               <Badge variant="success">Connected</Badge>
             </div>
-            <div className="flex items-center justify-between rounded-lg border border-neutral-800 p-3">
+            <div className="flex items-center justify-between rounded-lg border border-white/[0.08] p-3">
               <div>
                 <p className="text-sm font-medium">Redis</p>
-                <p className="text-xs text-neutral-500">localhost:6379</p>
+                <p className="text-xs text-white/40">localhost:6379</p>
               </div>
               <Badge variant="success">Connected</Badge>
             </div>
@@ -96,8 +96,8 @@ export default function SettingsPage() {
           <CardContent>
             <div className="space-y-2">
               {envVars.map((env) => (
-                <div key={env.key} className="flex flex-col gap-2 rounded-lg border border-neutral-800 p-3 sm:flex-row sm:items-center sm:gap-3">
-                  <code className="text-sm font-mono font-medium text-neutral-200 sm:w-40 shrink-0">{env.key}</code>
+                <div key={env.key} className="flex flex-col gap-2 rounded-lg border border-white/[0.08] p-3 sm:flex-row sm:items-center sm:gap-3">
+                  <code className="text-sm font-mono font-medium text-white/80 sm:w-40 shrink-0">{env.key}</code>
                   <Input
                     defaultValue={env.value}
                     type={env.sensitive ? "password" : "text"}

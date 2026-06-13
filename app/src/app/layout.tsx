@@ -7,6 +7,7 @@ import { AmbientBackground } from "@/components/layout/ambient-background";
 import { FloatingOrb } from "@/components/ai/floating-orb";
 import { AISuggestions } from "@/components/ai/ai-suggestions";
 import { KeyboardShortcuts } from "@/components/layout/keyboard-shortcuts";
+import { ToastContainer } from "@/components/ui/toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,7 @@ export default function RootLayout({
       lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full bg-neutral-950 text-neutral-100">
+      <body className="min-h-full bg-[#050510] text-white/90">
         <AmbientBackground />
         <DynamicIsland />
         <AISuggestions />
@@ -41,6 +42,7 @@ export default function RootLayout({
         <main className="relative z-10 mx-auto max-w-7xl px-3 pt-16 pb-28 sm:px-6 sm:pt-20 sm:pb-24">{children}</main>
         <ContextualDock />
         <FloatingOrb />
+        <ToastContainer />
       </body>
     </html>
   );

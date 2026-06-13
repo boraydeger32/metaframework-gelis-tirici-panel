@@ -135,7 +135,7 @@ export function DynamicIsland() {
         {!expanded && (
           <div
             className={cn(
-              "flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-2 py-1.5 shadow-2xl shadow-black/40 backdrop-blur-xl transition-all duration-500 cursor-pointer",
+              "glass-pill flex items-center gap-2 rounded-full px-2 py-1.5 transition-all duration-500 cursor-pointer",
               hovered ? "px-4 gap-3" : ""
             )}
             onClick={() => setExpanded(true)}
@@ -192,7 +192,7 @@ export function DynamicIsland() {
 
         {/* Expanded State */}
         {expanded && (
-          <div className="w-[calc(100vw-2rem)] sm:w-[720px] max-h-[80vh] overflow-y-auto rounded-2xl glass-heavy overflow-hidden animate-glass-in">
+          <div className="w-[calc(100vw-2rem)] sm:w-[720px] max-h-[80vh] overflow-y-auto rounded-3xl glass-heavy overflow-hidden animate-glass-in">
             {/* Header */}
             <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">

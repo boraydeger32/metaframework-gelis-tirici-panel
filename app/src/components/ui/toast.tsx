@@ -12,10 +12,10 @@ const icons = {
 };
 
 const styles = {
-  success: "border-emerald-400/20 bg-emerald-500/10 text-emerald-300",
-  error: "border-red-400/20 bg-red-500/10 text-red-300",
-  warning: "border-amber-400/20 bg-amber-500/10 text-amber-300",
-  info: "border-indigo-400/20 bg-indigo-500/10 text-indigo-300",
+  success: "from-emerald-400/15 to-emerald-500/5 border-emerald-300/20 text-emerald-200",
+  error: "from-red-400/15 to-red-500/5 border-red-300/20 text-red-200",
+  warning: "from-amber-400/15 to-amber-500/5 border-amber-300/20 text-amber-200",
+  info: "from-indigo-400/15 to-indigo-500/5 border-indigo-300/20 text-indigo-200",
 };
 
 export function ToastContainer() {
@@ -31,7 +31,7 @@ export function ToastContainer() {
           <div
             key={toast.id}
             className={cn(
-              "flex items-center gap-3 rounded-2xl border px-4 py-3 shadow-2xl backdrop-blur-xl animate-glass-in pointer-events-auto",
+              "flex items-center gap-3 rounded-2xl border px-4 py-3 bg-gradient-to-b backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_8px_32px_rgba(0,0,0,0.3)] animate-glass-in pointer-events-auto",
               styles[toast.type]
             )}
           >

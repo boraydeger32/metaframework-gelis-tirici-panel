@@ -3,19 +3,29 @@
 export function AmbientBackground() {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* Base */}
       <div className="absolute inset-0 bg-[#050510]" />
 
-      {/* Floating orbs */}
+      {/* Larger, more vivid orbs — Apple uses bold color bleed */}
       <div
         className="ambient-orb"
         style={{
-          width: "600px",
-          height: "600px",
-          top: "-10%",
-          left: "20%",
-          background: "radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)",
+          width: "800px",
+          height: "800px",
+          top: "-15%",
+          left: "15%",
+          background: "radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0.02) 50%, transparent 70%)",
           animationDelay: "0s",
+        }}
+      />
+      <div
+        className="ambient-orb"
+        style={{
+          width: "700px",
+          height: "700px",
+          bottom: "5%",
+          right: "5%",
+          background: "radial-gradient(circle, rgba(139, 92, 246, 0.10) 0%, rgba(139, 92, 246, 0.02) 50%, transparent 70%)",
+          animationDelay: "-8s",
         }}
       />
       <div
@@ -23,10 +33,10 @@ export function AmbientBackground() {
         style={{
           width: "500px",
           height: "500px",
-          bottom: "10%",
-          right: "10%",
-          background: "radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%)",
-          animationDelay: "-7s",
+          top: "35%",
+          left: "-8%",
+          background: "radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 60%)",
+          animationDelay: "-16s",
         }}
       />
       <div
@@ -34,21 +44,16 @@ export function AmbientBackground() {
         style={{
           width: "400px",
           height: "400px",
-          top: "40%",
-          left: "-5%",
-          background: "radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%)",
-          animationDelay: "-14s",
+          top: "60%",
+          right: "30%",
+          background: "radial-gradient(circle, rgba(236, 72, 153, 0.06) 0%, transparent 60%)",
+          animationDelay: "-12s",
+          animationDuration: "30s",
         }}
       />
 
-      {/* Noise texture */}
-      <div
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundSize: "128px",
-        }}
-      />
+      {/* Noise texture — gives glass that frosted texture */}
+      <div className="noise-overlay" />
     </div>
   );
 }
